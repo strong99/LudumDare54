@@ -37,10 +37,10 @@ public partial class Settings {
     }
 
     public void OnHover() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.ogg");
     }
 
     public void OnActivate() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.ogg");
     }
 }

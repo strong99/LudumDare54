@@ -27,7 +27,9 @@ public partial class Index {
             _quitApplicationFeature = _serviceProvider.GetService<QuitApplicationFeature>();
         }
     }
-    private IServiceProvider _serviceProvider;
+    private IServiceProvider _serviceProvider = default!;
+
+    private static Boolean WindowActivated = false;
 
     public QuitApplicationFeature? _quitApplicationFeature;
 
@@ -51,34 +53,40 @@ public partial class Index {
     }
 
     protected override void OnInitialized() {
-        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/menuButtonHover.wav");
-        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/menuButtonSelect.wav");
-        PlayMusic();
+        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/menuButtonHover.ogg");
+        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/menuButtonSelect.ogg");
+        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/background.ogg");
 
         base.OnInitialized();
+    }
+
+    protected override void OnAfterRender(Boolean firstRender) {
+        PlayMusic();
+
+        base.OnAfterRender(firstRender);
     }
 
     public async Task Continue() {
         OnActivate();
         SessionManager.GetOrCreate();
-        NavigationManager.NavigateTo("/play");
+        NavigationManager.NavigateTo("play");
     }
 
     public void StartNew() {
         OnActivate();
         SessionManager.NewSession();
-        NavigationManager.NavigateTo("/play");
+        NavigationManager.NavigateTo("play");
     }
 
     public void OnHover() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.ogg");
     }
 
     public void OnActivate() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.ogg");
     }
 
     public void PlayMusic() {
-        AudioPlayer.PlayMusic("_content/LudumDare54.Graphics/audio/background.wav");
+        AudioPlayer.PlayMusic("_content/LudumDare54.Graphics/audio/background.ogg");
     }
 }

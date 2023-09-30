@@ -27,37 +27,3 @@
 </ul>
 
 <button @onclick="args=>{ OnSelect(); State.Finish();}" @onmouseenter="OnHover" disabled="@(!State.Deck.Any())"><span>Finish packing and start journey</span></button>
-
-@code {
-    [Parameter]
-    public required DeckSelectionState State { get; set; }
-
-    [Parameter]
-    public required Session Session { get; set; }
-
-    [Inject]
-    public required RepositoryFactory RepositoryFactory { get; set; }
-
-    private Repository _repository = default!;
-
-    protected void Toggle(ResourceCard card) {
-        if ((State.Deck?.Count ?? 0) >= 10) {
-            return;
-        }
-
-        OnCardSelect();
-
-        if (State.Deck.Contains(card)) {
-            State.Deck.Remove(card);
-        } 
-        else {
-            State.Deck.Add(card);
-        }
-    }
-
-    protected override async Task OnParametersSetAsync() {
-        _repository = await RepositoryFactory.GetRepository();
-
-        await base.OnParametersSetAsync();
-    }
-}

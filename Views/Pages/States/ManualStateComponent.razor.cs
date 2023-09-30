@@ -33,10 +33,10 @@ public partial class ManualStateComponent {
     }
 
     private void OnHover() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.ogg");
     }
 
     private void OnSelect() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.ogg");
     }
 }

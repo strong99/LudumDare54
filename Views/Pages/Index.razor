@@ -1,19 +1,23 @@
 ﻿@page "/"
 
-<div class="index menu view">
+<div class="index menu view @(WindowActivated ? "activated" : "inactive")">
+    @if (!WindowActivated) {
+        <button class="start" @onclick="args=>WindowActivated=true"><span>Click to Start</span></button>
+    }
+    else {
     <div class="panel">
         <h1>The Despatch Rider Of Hope</h1>
 
         <nav>
             @if (SessionManager.HasSession) {
-                <a href="/play" @onclick:preventDefault @onclick="Continue" @onmouseenter="OnHover"><span>Continue story</span></a>
+                <a href="play" @onclick:preventDefault @onclick="Continue" @onmouseenter="OnHover"><span>Continue story</span></a>
             }
-            <a href="/play" @onclick:preventDefault @onclick="StartNew" @onmouseenter="OnHover"><span>New story</span></a>
+            <a href="play" @onclick:preventDefault @onclick="StartNew" @onmouseenter="OnHover"><span>New story</span></a>
 
-            <a href="/settings" @onclick="OnActivate" @onmouseenter="OnHover"><span>Settings</span></a>
+            <a href="settings" @onclick="OnActivate" @onmouseenter="OnHover"><span>Settings</span></a>
 
             @if (CanEditRepository) {
-                <a href="/editor" @onclick="OnActivate" @onmouseenter="OnHover"><span>Editor</span></a>
+                <a href="editor" @onclick="OnActivate" @onmouseenter="OnHover"><span>Editor</span></a>
             }
 
             @if (CanQuit) {
@@ -21,4 +25,5 @@
             }
         </nav>
     </div>
+    }
 </div>

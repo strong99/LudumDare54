@@ -22,8 +22,8 @@ public partial class Play {
     public required AudioPlayer AudioPlayer { get; set; }
 
     protected override void OnInitialized() {
-        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/cardButtonHover.wav");
-        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/cardButtonSelect.wav");
+        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/cardButtonHover.ogg");
+        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/cardButtonSelect.ogg");
         PlayMusic();
 
         base.OnInitialized();
@@ -62,15 +62,15 @@ public partial class Play {
     }
 
     public void PlayMusic() {
-        AudioPlayer.PlayMusic("_content/LudumDare54.Graphics/audio/background.wav");
+        AudioPlayer.PlayMusic("_content/LudumDare54.Graphics/audio/background.ogg");
     }
 
     public void OnHover() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.ogg");
     }
 
     public void OnActivate() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.ogg");
     }
 }
 

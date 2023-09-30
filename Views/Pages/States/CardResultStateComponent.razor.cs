@@ -43,14 +43,14 @@ public partial class CardResultStateComponent {
     }
 
     private void OnHover() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.ogg");
     }
 
     private void OnSelect() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.ogg");
     }
 
     private void OnPlayResult() {
-        AudioPlayer.Play($"_content/LudumDare54.Graphics/audio/{(State.Success ? "success" : "failure")}.wav");
+        AudioPlayer.Play($"_content/LudumDare54.Graphics/audio/{(State.Success ? "success" : "failure")}.ogg");
     }
 }

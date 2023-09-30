@@ -96,8 +96,8 @@
         button {
             color: inherit;
             padding: 0.5em 1em;
-            height:auto;
-            position:absolute;
+            height: auto;
+            position: absolute;
             right: -2em;
             color: black;
             bottom: 0;
@@ -109,6 +109,19 @@ div:has(> div.DeckSelectionState) > .preview > .inner {
     background-image: url(../wwwroot/graphics/play/CardSelectionRoom.png);
     background-size: cover;
     background-position: center;
+
+    &:after {
+        content: ' ';
+        display: block;
+        height: 20em;
+        width: 20em;
+        position: absolute;
+        left: 45%;
+        top: 30%;
+        background-image: url(../wwwroot/graphics/play/scenes/player.png);
+        background-size: cover;
+        background-position: center;
+    }
 }
 
 div:has(> div.intro01.ManualState) > .preview > .inner {

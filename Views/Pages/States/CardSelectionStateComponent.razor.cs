@@ -20,6 +20,8 @@ public partial class CardSelectionStateComponent {
     private Random _random = new();
     private Int32 _randomIdx;
 
+    private List<ImageToRender> _sceneElements = default!;
+         
     protected override void OnInitialized() {
         _innerGuid = Guid.NewGuid();
         _randomIdx = _random.Next(0, 1000000);
@@ -56,6 +58,8 @@ public partial class CardSelectionStateComponent {
 
     protected override async Task OnParametersSetAsync() {
         _repository = await RepositoryFactory.GetRepository();
+
+        _sceneElements = RenderScene().OrderBy(i => i.Order).ToList();
 
         await base.OnParametersSetAsync();
     }
@@ -288,10 +292,10 @@ public partial class CardSelectionStateComponent {
     }
 
     private void OnCardHover() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/cardButtonHover.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/cardButtonHover.ogg");
     }
 
     private void OnCardSelect() {
-        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/cardButtonSelect.wav");
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/cardButtonSelect.ogg");
     }
 }

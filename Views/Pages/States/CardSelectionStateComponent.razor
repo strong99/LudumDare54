@@ -11,7 +11,7 @@
 <div class="preview">
     <div class="inner" id="@_innerGuid">
         @{
-            var list = RenderScene().OrderBy(i => i.Order).ToList();
+            var list = _sceneElements;
             foreach (var item in list) {
                 <img style="@($"left: {item.PositionX}%; top: {item.PositionY}%; transform-origin: {item.OriginX}% {item.OriginY}%; transform: translate(-{item.OriginX}%, -{item.OriginY}%) scale({item.Scale / 100})")" src="@item.File" />
             }
