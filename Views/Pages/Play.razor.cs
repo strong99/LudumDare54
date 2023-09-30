@@ -7,6 +7,9 @@ public partial class Play {
 
     [Inject]
     public required RepositoryFactory RepositoryFactory { get; set; }
+    
+    [Inject]
+    public required SessionManager SessionManager { get; set; }
 
     private Repository _repository = default!;
     private Session _session = default!;
@@ -15,7 +18,7 @@ public partial class Play {
     protected override async Task OnParametersSetAsync() {
         _repository = await RepositoryFactory.GetRepository();
 
-        _session = new();
+        _session = SessionManager.GetOrCreate();
         _stateManager = new() { InputCallback = StateChanged };
 
         _ = _session.Play(_repository, _stateManager);
@@ -23,7 +26,7 @@ public partial class Play {
         await base.OnParametersSetAsync();
     }
 
-    private State _state;
+    private State? _state;
 
     private void StateChanged(State state) {
         _state = state;

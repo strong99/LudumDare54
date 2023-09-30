@@ -3,13 +3,16 @@
 @using LudumDare54.Graphics.Pages.States
 
 <div class="play view">
-    <a href="/" class="return"><span>return</span></a>
+    <a href="/" class="menu"><span>Menu</span></a>
 
     @if (_state is DeckSelectionState deckSelectionState) {
         <DeckSelectionStateComponent State="deckSelectionState" Session="_session" />
     }
     else if (_state is CardSelectionState cardSelectionState) {
         <CardSelectionStateComponent State="cardSelectionState" Session="_session" />
+    }
+    else if (_state is CardResultState cardResultState) {
+        <CardResultStateComponent State="cardResultState" Session="_session" />
     }
     else {
         @_state?.GetType().Name

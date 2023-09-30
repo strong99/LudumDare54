@@ -1,9 +1,10 @@
 ﻿@using LudumDare54.Core;
 @using LudumDare54.Core.States;
-<h3>DeckSelectionStateComponent</h3>
+
+<div class="DeckSelectionState" />
 
 <p>
-    <span>@(Session.Deck?.Count ?? 0)</span>
+    <span>@(State.Deck?.Count ?? 0)</span>
     <span>/</span>
     <span>@State.Amount</span>
 </p>

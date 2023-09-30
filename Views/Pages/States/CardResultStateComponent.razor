@@ -1,0 +1,11 @@
+﻿@using LudumDare54.Core;
+@using LudumDare54.Core.States;
+<h3>CardSelectionStateComponent</h3>
+
+<p>
+    @State.OutcomeId
+    - 
+    @State.Success
+</p>
+
+<button @onclick="args=>State.Finish()"><span>Continue</span></button>

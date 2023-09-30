@@ -10,12 +10,15 @@ public class MemoryRepositoryCreator : RepositoryFactory {
 
     private Repository? _repository;
 
-    [Inject]
-    public required HttpClient HttpClient { get; set; } 
+    private HttpClient _httpClient;
+
+    public MemoryRepositoryCreator(HttpClient httpClient) {
+        _httpClient = httpClient;
+    }
 
     private async Task<Repository> Load() {
         try {
-            var strData = await HttpClient.GetStringAsync("_content/LudumDare54.Graphics/config/data.json");
+            var strData = await _httpClient.GetStringAsync("_content/LudumDare54.Graphics/config/data.json");
             var repository = JsonConvert.DeserializeObject<Repository>(strData, new JsonSerializerSettings {
                 TypeNameHandling = TypeNameHandling.Objects
             });

@@ -29,11 +29,15 @@
 
     <ItemGroup>
       <None Remove="Style\app.scss" />
+      <None Remove="Style\menu.scss" />
       <None Remove="Style\panels.scss" />
       <None Remove="Style\play.scss" />
+      <None Remove="Style\settings.scss" />
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="Style\settings.scss" />
+      <Content Include="Style\menu.scss" />
       <Content Include="Style\play.scss" />
       <Content Include="Style\app.scss" />
       <Content Include="Style\panels.scss" />

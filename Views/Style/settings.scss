@@ -1,0 +1,51 @@
+﻿div.settings.view {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    place-content: center;
+    background-image: url(../wwwroot/graphics/menu/background-01.png);
+    background-size: cover;
+
+    .panel {
+        margin-top: 2em;
+        width: 20em;
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+
+        header {
+            display: flex;
+            flex-direction: row;
+            place-items: center;
+
+            h1, h2, h3 {
+                margin: 0;
+            }
+
+            .return {
+                color: inherit;
+                font-size: 2em;
+                text-decoration: none;
+
+                > span {
+                    display: none;
+                }
+            }
+        }
+
+        label {
+            padding: 0.5em 1em;
+            background-color: rgba(0,0,0,0.1);
+            width: 15em;
+            text-align: left;
+
+            &:hover {
+                background-color: rgba(0,0,0,0.2);
+            }
+
+            > span.label {
+                width: 100%;
+            }
+        }
+    }
+}

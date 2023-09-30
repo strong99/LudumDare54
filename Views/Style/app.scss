@@ -1,9 +1,15 @@
-﻿html, body, div#app, main, div.page, div.view {
+﻿html, body, div#app, main, div.page, div.view, div.panel, article {
     height: 100%;
     width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
 }
 
 @import 'panels.scss';
+@import 'menu.scss';
+@import 'settings.scss';
 @import 'play.scss';
 
 div.edit.view {

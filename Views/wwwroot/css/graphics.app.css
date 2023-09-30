@@ -1,7 +1,11 @@
 ﻿@charset "UTF-8";
-html, body, div#app, main, div.page, div.view {
+html, body, div#app, main, div.page, div.view, div.panel, article {
   height: 100%;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .edit.view {
@@ -123,13 +127,148 @@ html, body, div#app, main, div.page, div.view {
   width: 18em;
 }
 
-div.play.view button {
+div.menu.view {
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: center;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  background-image: url(../graphics/menu/background-01.png);
+  background-size: cover;
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 0;
+}
+div.menu.view:before {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(35%, -40%);
+  content: "";
+  background-image: url(../graphics/menu/00012.png);
+  background-size: contain;
+  width: 90em;
+  height: 90em;
+  display: block;
+  z-index: -1;
+}
+div.menu.view .panel {
+  width: 16em;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-top: 3.5em;
+  margin-right: 4em;
+}
+div.menu.view .panel h1, div.menu.view .panel h2, div.menu.view .panel h3 {
+  font-size: 2.5rem;
+  color: inherit;
+  margin-bottom: 1em;
+}
+div.menu.view nav {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  place-content: center;
+}
+div.menu.view nav > button, div.menu.view nav a {
+  border: none;
   background: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  padding: 0.25em 0.5em;
+  color: inherit;
+  text-align: right;
+}
+div.menu.view nav > button:hover, div.menu.view nav a:hover {
+  font-weight: bolder;
+}
+div.menu.view nav > button:hover:before, div.menu.view nav a:hover:before {
+  content: "> ";
+}
+div.menu.view nav > button:hover:after, div.menu.view nav a:hover:after {
+  content: " <";
+}
+
+div.settings.view {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  place-content: center;
+  background-image: url(../graphics/menu/background-01.png);
+  background-size: cover;
+}
+div.settings.view .panel {
+  margin-top: 2em;
+  width: 20em;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+div.settings.view .panel header {
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+}
+div.settings.view .panel header h1, div.settings.view .panel header h2, div.settings.view .panel header h3 {
+  margin: 0;
+}
+div.settings.view .panel header .return {
+  color: inherit;
+  font-size: 2em;
+  text-decoration: none;
+}
+div.settings.view .panel header .return > span {
+  display: none;
+}
+div.settings.view .panel label {
+  padding: 0.5em 1em;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 15em;
+  text-align: left;
+}
+div.settings.view .panel label:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+div.settings.view .panel label > span.label {
+  width: 100%;
+}
+
+div.play.view button {
+  background: white;
   border-radius: 0.5em;
   border: 1px solid black;
 }
 div.play.view button.selected {
   background: #cad5ff;
+}
+div.play.view a.menu, div.play.view button.menu {
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  color: white;
+  z-index: 999;
+}
+div.play.view a.menu:after, div.play.view button.menu:after {
+  content: "☰";
+}
+div.play.view a.menu:hover, div.play.view button.menu:hover {
+  font-weight: bolder;
+  background: rgba(0, 0, 0, 0.4);
+}
+div.play.view a.menu > span, div.play.view button.menu > span {
+  display: none;
+}
+
+div:has(> div.DeckSelectionState) {
+  background-image: url(../graphics/play/CardSelectionRoom.png);
+  background-size: cover;
+  background-position: center;
 }
 
 div.edit.view {

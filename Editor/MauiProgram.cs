@@ -15,6 +15,8 @@ public static class MauiProgram {
 
         builder.Services.AddSingleton<SessionSettings, MauiSessionSettings>();
         builder.Services.AddSingleton<RepositoryFactory, MemoryRepositoryCreator>();
+        builder.Services.AddSingleton<QuitApplicationFeature, MauiQuitApplicationFeature>();
+        builder.Services.AddSingleton<SessionManager>();
 
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();

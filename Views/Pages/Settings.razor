@@ -1,0 +1,28 @@
+﻿@page "/settings"
+@using LudumDare54.Core.States;
+@using LudumDare54.Graphics.Pages.States
+
+<div class="settings view">
+    <div class="panel">
+        <header>
+            <a href="/" class="return"><span>Return</span></a>
+            <h1>Settings</h1>
+        </header>
+
+        @if (CanSelectRepository) {
+            <fieldset>
+                <legend>Config</legend>
+                <label>
+                    <span class="label">Preset</span>
+                    <input type="text" @bind="Preset" />
+                    <button type="button" @onclick="Select">Select</button>
+                </label>
+            </fieldset>
+        }
+
+        <label>
+            <span class="label">Audio</span>
+            <input type="checkbox" value="@SessionSettings.Audio" @onchange="args=>SessionSettings.Audio = !SessionSettings.Audio"/>
+        </label>
+    </div>
+</div>

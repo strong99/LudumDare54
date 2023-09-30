@@ -12,7 +12,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddSingleton<SessionSettings, WebSessionSettings>();
 builder.Services.AddSingleton<RepositoryFactory, MemoryRepositoryCreator>();
+builder.Services.AddSingleton<SessionManager>();
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();

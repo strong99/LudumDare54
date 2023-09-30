@@ -14,3 +14,16 @@ public interface LoadableRepositoryFactory {
 public interface WriteableRepositoryFactory : LoadableRepositoryFactory {
     void Save();
 }
+
+public class SessionManager {
+    public Session? Session { get; set; }
+
+    public Boolean HasSession { get => Session is not null; }
+
+    public Session GetOrCreate() => Session ??= new();
+    public Session NewSession() => Session = new();
+}
+
+public interface QuitApplicationFeature {
+    void TryQuit();
+}
