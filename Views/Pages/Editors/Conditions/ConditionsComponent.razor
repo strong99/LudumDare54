@@ -1,0 +1,29 @@
+﻿@using LudumDare54.Core.Conditions;
+@using LudumDare54.Core.Tags;
+@{
+    var guid = Guid.NewGuid();
+    var conditionTypesId = $"ConditionType:{guid}";
+}
+<ul class="conditions">
+    @foreach (var condition in Conditions) {
+        <li>
+            @if (condition is HasKeyTagCondition hasKeyTagCondition) {
+                <HasKeyTagConditionComponent Condition="hasKeyTagCondition" />
+            }
+            <button type="button" @onclick="args=>Conditions.Remove(condition)" class="delete"><span>Delete</span></button>
+        </li>
+    }
+    <li>
+        <input type="text" list="@conditionTypesId" @bind="NewConditionType" />
+        <datalist id="@conditionTypesId">
+            @foreach (var tag in _availableConditionTypes) {
+                <option>@tag.Key</option>
+            }
+        </datalist>
+        <button type="button" @onclick="Add">Add</button>
+    </li>
+</ul>
+
+@code {
+    
+}

@@ -1,0 +1,15 @@
+﻿@using LudumDare54.Core.Conditions;
+@using LudumDare54.Core.Tags;
+
+<select @bind="Not">
+    <option value="False">Has</option>
+    <option value="True">Has not</option>
+</select> 
+<input type="text" @bind="Condition.Key" />
+
+@code {
+    public String Not { get => Condition.Not.ToString(); set => Condition.Not = Boolean.Parse(value); }
+
+    [Parameter]
+    public required HasKeyTagCondition Condition { get; set; }
+}

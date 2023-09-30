@@ -1,0 +1,18 @@
+﻿@page "/"
+
+<div class="index view">
+    <h1>Ludum Dare 54</h1>
+
+    @if (CanSelectRepository) {
+        <label>
+            <span class="label">Preset</span>
+            <input type="text" @bind="Preset" />
+            <button type="button" @onclick="Select">Select</button>
+        </label>
+    }
+
+    @if (CanEditRepository) {
+        <p><a href="/editor">Editor</a></p>
+    }
+    <p><a href="/play">Play</a></p>
+</div>

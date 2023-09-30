@@ -1,0 +1,35 @@
+@using Core;
+<header>
+    <h2>Resource cards</h2>
+    <button class="close" @onclick="args=>Manager.Remove(Model)"><span>Close</span></button>
+</header>
+
+<form @onsubmit="_=>{}" @onsubmit:preventDefault class="search">
+    <label>
+        <input type="search" @bind="_searchInput" />
+        <button class="search" type="submit">Search</button>
+    </label>
+</form>
+
+<ul class="search">
+    @foreach (var resourceCard in ResourceCards) {
+        if (!resourceCard.Id.Contains(_searchInput)
+        && !resourceCard.Tags.Any(t => t.Key.Contains(_searchInput, StringComparison.OrdinalIgnoreCase))) {
+            continue;
+        }
+        <li>
+            <button type="button" class="title main" @onclick="args=>Manager.Swap(Model, new ResourceCardPanelData(resourceCard))">@resourceCard.Id</button>
+            <button type="button" class="openAt" @onclick="args=>Manager.After(Model, new ResourceCardPanelData(resourceCard))">&#x1F5D7;</button>
+        </li>
+    }
+</ul>
+
+<menu>
+    <button class="create" type="button" @onclick="args=>{
+        var resourceCard = new ResourceCard(Guid.NewGuid().ToString(), true);
+        _repository.ResourceCards.Add(resourceCard);
+        Manager.Swap(Model, new ResourceCardPanelData(resourceCard));
+    }">
+        <span>Create new</span>
+    </button>
+</menu>

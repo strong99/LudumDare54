@@ -1,0 +1,28 @@
+﻿@using LudumDare54.Core.Modifiers;
+@using LudumDare54.Core.Tags;
+@{
+    var guid = Guid.NewGuid();
+    var modifierTypesId = $"ModifierType:{guid}";
+}
+<ul class="modifiers">
+    @foreach (var modifier in Modifiers) {
+        <li>
+            @if (modifier is AddKeyTagModifier addKeyTagModifier) {
+                <AddKeyTagModifierComponent Modifier="addKeyTagModifier" />
+            }
+            else if (modifier is RemoveKeyTagModifier removeKeyTagModifier) {
+                <RemoveKeyTagModifierComponent Modifier="removeKeyTagModifier" />
+            }
+            <button type="button" @onclick="args=>Modifiers.Remove(modifier)" class="delete"><span>Delete</span></button>
+        </li>
+    }
+    <li>
+        <input type="text" list="@modifierTypesId" @bind="NewModifierType" />
+        <datalist id="@modifierTypesId">
+            @foreach (var tag in _availableModifierTypes) {
+                <option>@tag.Key</option>
+            }
+        </datalist>
+        <button type="button" @onclick="Add">Add</button>
+    </li>
+</ul>

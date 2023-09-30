@@ -1,0 +1,49 @@
+﻿@using LudumDare54.Core;
+@using LudumDare54.Core.States;
+<h3>DeckSelectionStateComponent</h3>
+
+<p>
+    <span>@(Session.Deck?.Count ?? 0)</span>
+    <span>/</span>
+    <span>@State.Amount</span>
+</p>
+
+<ul>
+    @foreach(var card in _repository.ResourceCards) {
+        Session.Deck ??= new();
+        var selected = State.Deck.Any(x=>x.Id.Equals(card.Id, StringComparison.OrdinalIgnoreCase));
+        <li>
+            <button class="@(selected ? "selected" : "unselected")" @onclick="args=>Toggle(card)">@card.Id</button>
+        </li>
+    }
+</ul>
+
+<button @onclick="args=>State.Finish()" disabled="@(!State.Deck.Any())"><span>Accept</span></button>
+
+@code {
+    [Parameter]
+    public required DeckSelectionState State { get; set; }
+
+    [Parameter]
+    public required Session Session { get; set; }
+
+    [Inject]
+    public required RepositoryFactory RepositoryFactory { get; set; }
+
+    private Repository _repository = default!;
+
+    protected void Toggle(ResourceCard card) {
+        if (State.Deck.Contains(card)) {
+            State.Deck.Remove(card);
+        } 
+        else {
+            State.Deck.Add(card);
+        }
+    }
+
+    protected override async Task OnParametersSetAsync() {
+        _repository = await RepositoryFactory.GetRepository();
+
+        await base.OnParametersSetAsync();
+    }
+}

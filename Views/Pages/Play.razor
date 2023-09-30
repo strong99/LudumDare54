@@ -1,0 +1,17 @@
+﻿@page "/play"
+@using LudumDare54.Core.States;
+@using LudumDare54.Graphics.Pages.States
+
+<div class="play view">
+    <a href="/" class="return"><span>return</span></a>
+
+    @if (_state is DeckSelectionState deckSelectionState) {
+        <DeckSelectionStateComponent State="deckSelectionState" Session="_session" />
+    }
+    else if (_state is CardSelectionState cardSelectionState) {
+        <CardSelectionStateComponent State="cardSelectionState" Session="_session" />
+    }
+    else {
+        @_state?.GetType().Name
+    }
+</div>

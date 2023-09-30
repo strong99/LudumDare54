@@ -1,0 +1,9 @@
+﻿@using LudumDare54.Core.Modifiers;
+@using LudumDare54.Core.Tags;
+
+<span>Add</span> <input type="text" @bind="Modifier.Key" />
+
+@code {
+    [Parameter]
+    public required AddKeyTagModifier Modifier { get; set; }
+}

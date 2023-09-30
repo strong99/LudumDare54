@@ -1,0 +1,195 @@
+﻿@charset "UTF-8";
+html, body, div#app, main, div.page, div.view {
+  height: 100%;
+  width: 100%;
+}
+
+.edit.view {
+  margin: 0;
+  padding: 0;
+}
+.edit.view > nav {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 6px double;
+}
+.edit.view > nav > a, .edit.view > nav button {
+  display: block;
+  box-sizing: border-box;
+  padding: 0.5em 1em;
+  margin: 0;
+  border: none;
+  background: none;
+  text-decoration: none;
+  color: black;
+}
+.edit.view > nav > a:not(:first-child), .edit.view > nav button:not(:first-child) {
+  border-left: 1px solid black;
+}
+.edit.view > nav > a:hover, .edit.view > nav button:hover {
+  background: #eee;
+}
+.edit.view > ul.panels {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-sizing: border-box;
+}
+.edit.view > ul.panels > li {
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+  width: 30em;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.edit.view > ul.panels > li > form.main {
+  overflow-y: auto;
+}
+.edit.view > ul.panels > li > * {
+  padding: 0 0.5em;
+}
+.edit.view > ul.panels > li > header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.5em;
+  background: #eee;
+  border-bottom: #ddd 1px solid;
+}
+.edit.view > ul.panels > li > header > button, .edit.view > ul.panels > li > header > a {
+  border: none;
+  text-decoration: none;
+  background: none;
+}
+.edit.view > ul.panels > li > header > button:hover, .edit.view > ul.panels > li > header > a:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.edit.view > ul.panels > li > header > button > span, .edit.view > ul.panels > li > header > a > span {
+  display: none;
+}
+.edit.view > ul.panels > li > header > h1, .edit.view > ul.panels > li > header > h2, .edit.view > ul.panels > li > header > h3 {
+  width: 100%;
+  margin: 0;
+}
+.edit.view > ul.panels > li > form.search {
+  width: 100%;
+  display: flex;
+  margin-bottom: 0.5em;
+}
+.edit.view > ul.panels > li > form.search > label {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.edit.view > ul.panels > li > form.search > label > input {
+  width: 100%;
+}
+.edit.view > ul.panels > li > ul.search {
+  margin-bottom: 0.5em;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  height: 100%;
+  overflow: auto;
+}
+.edit.view > ul.panels > li > ul.search > li {
+  display: flex;
+}
+.edit.view > ul.panels > li > ul.search > li:hover {
+  background: #eee;
+  font-weight: bold;
+}
+.edit.view > ul.panels > li > ul.search > li button {
+  border: none;
+  background: none;
+  font-weight: inherit;
+}
+.edit.view > ul.panels > li > ul.search > li button.main {
+  text-align: left;
+  width: 100%;
+}
+
+.edit.view > ul.panels > li.EventCardsPanelData, .edit.view > ul.panels > li.ResourceCardsPanelData {
+  width: 18em;
+}
+
+div.play.view button {
+  background: none;
+  border-radius: 0.5em;
+  border: 1px solid black;
+}
+div.play.view button.selected {
+  background: #cad5ff;
+}
+
+div.edit.view {
+  display: flex;
+  flex-direction: column;
+}
+div.edit.view > nav {
+  flex-shrink: 0;
+}
+
+label {
+  margin-top: 0.5em;
+  display: flex;
+  flex-direction: row;
+}
+label > span.label {
+  width: 5em;
+}
+label > span.label.main {
+  width: auto;
+}
+
+ul.tags {
+  margin-bottom: 0.5em;
+}
+ul.tags > li {
+  display: flex;
+  width: 100%;
+}
+ul.tags > li > input {
+  width: 100%;
+}
+
+button.return:before,
+a.return:before {
+  content: "◀";
+  margin-right: 0.3em;
+}
+
+button.close:before,
+a.close:before {
+  content: "✕";
+  margin-right: 0.3em;
+}
+
+ul.next > li {
+  display: flex;
+  flex-direction: row;
+}
+ul.next > li > label {
+  width: 100%;
+}
+ul.next > li > label > .label {
+  width: 100%;
+}
+ul.next > li > label > input {
+  width: 3.2em;
+}
+
+li:has(> form > div > .delete:hover),
+li:has(> .delete:hover) {
+  background: #fbb;
+}

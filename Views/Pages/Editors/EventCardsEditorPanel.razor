@@ -1,0 +1,34 @@
+@using LudumDare54.Core;
+<header>
+    <h2>Event cards</h2>
+    <button class="close" @onclick="args=>Manager.Remove(Model)"><span>Close</span></button>
+</header>
+
+<form @onsubmit="_=>{}" @onsubmit:preventDefault class="search">
+    <label>
+        <input type="search" @bind="_searchInput" />
+        <button class="search" type="submit">Search</button>
+    </label>
+</form>
+
+<ul class="search">
+    @foreach (var eventCard in EventCards) {
+        if (!eventCard.Id.Contains(_searchInput)) {
+            continue;
+        }
+        <li>
+            <button type="button" class="title main" @onclick="args=>Manager.Swap(Model, new EventCardPanelData(eventCard))">@eventCard.Id</button>
+            <button type="button" class="openAt" @onclick="args=>Manager.After(Model, new EventCardPanelData(eventCard))">&#x1F5D7;</button>
+        </li>
+    }
+</ul>
+
+<menu>
+    <button class="create" type="button" @onclick="args=>{
+    var eventCard = new EventCard(Guid.NewGuid().ToString());
+    _repository.EventCards.Add(eventCard);
+    Manager.Swap(Model, new EventCardPanelData(eventCard));
+}">
+        <span>Create new</span>
+    </button>
+</menu>

@@ -1,0 +1,55 @@
+{
+  "$type": "LudumDare54.Core.Repository, LudumDare54.Core",
+  "ResourceCards": [
+    {
+      "$type": "LudumDare54.Core.ResourceCard, LudumDare54.Core",
+      "Id": "chainsaw",
+      "Consumable": true,
+      "Tags": [
+      ]
+    },
+    {
+      "$type": "LudumDare54.Core.ResourceCard, LudumDare54.Core",
+      "Id": "ductape",
+      "Consumable": true,
+      "Tags": [
+      ]
+    },
+    {
+      "$type": "LudumDare54.Core.ResourceCard, LudumDare54.Core",
+      "Id": "wrench",
+      "Consumable": true,
+      "Tags": [
+      ]
+    },
+    {
+      "$type": "LudumDare54.Core.ResourceCard, LudumDare54.Core",
+      "Id": "food ration",
+      "Consumable": true,
+      "Tags": [
+      ]
+    }
+  ],
+  "EventCards": [
+    {
+      "$type": "LudumDare54.Core.EventCard, LudumDare54.Core",
+      "Id": "motor break down",
+      "Outcome": [
+      ],
+      "Conditions": [
+      ],
+      "Next": [
+      ]
+    },
+    {
+      "$type": "LudumDare54.Core.EventCard, LudumDare54.Core",
+      "Id": "log on the road",
+      "Outcome": [
+      ],
+      "Conditions": [
+      ],
+      "Next": [
+      ]
+    }
+  ]
+}
