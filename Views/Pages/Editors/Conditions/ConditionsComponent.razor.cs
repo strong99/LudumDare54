@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Components;
 namespace LudumDare54.Graphics.Pages.Editors.Conditions;
 public partial class ConditionsComponent {
     private Dictionary<String, Type> _availableConditionTypes = new() {
-        ["Has key"] = typeof(HasKeyTagCondition)
+        ["Has key"] = typeof(HasKeyTagCondition),
+        ["Is round"] = typeof(IsRoundCondition)
     };
 
 

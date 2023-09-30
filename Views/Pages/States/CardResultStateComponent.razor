@@ -1,6 +1,12 @@
 ﻿@using LudumDare54.Core;
 @using LudumDare54.Core.States;
-<h3>CardSelectionStateComponent</h3>
+
+<div class="CardResultState" />
+
+<div class="preview">
+    <div class="inner" id="@_innerGuid">
+    </div>
+</div>
 
 <p>
     @State.OutcomeId
@@ -8,4 +14,4 @@
     @State.Success
 </p>
 
-<button @onclick="args=>State.Finish()"><span>Continue</span></button>
+<button @onclick="args=>{OnSelect(); State.Finish();}" @onmouseenter="OnHover"><span>Continue</span></button>

@@ -1,0 +1,29 @@
+﻿@using LudumDare54.Core.Scenes;
+@{
+    var guid = Guid.NewGuid();
+    var anchorTypesId = $"AnchorType:{guid}";
+}
+<ul class="anchors">
+    @foreach (var anchor in Anchors) {
+        <li class="@(anchor.GetType()?.Name) createNew">
+            @if (anchor is StaticAnchor staticAnchor) {
+                <StaticAnchorComponent Model="staticAnchor" />
+            }
+            else if (anchor is StaticSelectingAnchor staticSelectionAnchor) {
+                <StaticSelectingAnchorComponent Model="staticSelectionAnchor" />
+            }
+            <button type="button" @onclick="args=>Up(anchor)" class="up"><span>Up</span></button>
+            <button type="button" @onclick="args=>Down(anchor)" class="down"><span>Down</span></button>
+            <button type="button" @onclick="args=>Anchors.Remove(anchor)" class="delete"><span>Remove</span></button>
+        </li>
+    }
+    <li>
+        <input type="text" list="@anchorTypesId" @bind="NewAnchorType" />
+        <datalist id="@anchorTypesId">
+            @foreach (var anchor in _availableAnchorTypes) {
+                <option>@anchor.Key</option>
+            }
+        </datalist>
+        <button type="button" @onclick="AddAnchor">Add</button>
+    </li>
+</ul>

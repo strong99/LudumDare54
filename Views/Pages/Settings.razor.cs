@@ -4,15 +4,17 @@ using Microsoft.AspNetCore.Components;
 namespace LudumDare54.Graphics.Pages;
 
 public partial class Settings {
-
     [Inject]
     public required RepositoryFactory RepositoryFactory { get; set; }
-    
+
     [Inject]
     public required SessionSettings SessionSettings { get; set; }
 
     [Inject]
     public required SessionManager SessionManager { get; set; }
+
+    [Inject]
+    public required AudioPlayer AudioPlayer { get; set; }
 
     private Repository _repository = default!;
 
@@ -32,5 +34,13 @@ public partial class Settings {
         _repository = await RepositoryFactory.GetRepository();
 
         await base.OnParametersSetAsync();
+    }
+
+    public void OnHover() {
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.wav");
+    }
+
+    public void OnActivate() {
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.wav");
     }
 }

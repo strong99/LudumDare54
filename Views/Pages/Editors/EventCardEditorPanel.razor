@@ -1,5 +1,6 @@
 @using LudumDare54.Graphics.Pages.Editors.Conditions
 @using LudumDare54.Graphics.Pages.Editors.Shared
+@using LudumDare54.Graphics.Pages.Editors.Tags
 <header>
     <button class="return" @onclick="args=>Manager.Swap(Model, new EventCardsPanelData())"><span>Return</span></button>
     <h2>Event card</h2>
@@ -11,6 +12,13 @@
         <span class="label">Name</span>
         <input type="text" @bind="UniqueId" maxlength="64" />
     </label>
+
+    <div class="tags">
+        <label>
+            <span class="label">Tags</span>
+        </label>
+        <TagsComponent Tags="Model.Card.Tags" />
+    </div>
 
     <div class="conditions">
         <label>

@@ -1,6 +1,5 @@
 ﻿using LudumDare54.Core;
 using LudumDare54.Graphics;
-using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 
 namespace LudumDare54.Web;
@@ -24,7 +23,7 @@ public class MemoryRepositoryCreator : RepositoryFactory {
             });
             return repository ?? throw new Exception("Unable load the repository from file");
         }
-        catch(Exception e) {
+        catch (Exception e) {
             throw new Exception("Unable to locate the repository", e);
         }
     }

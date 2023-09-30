@@ -1,7 +1,5 @@
 ﻿using LudumDare54.Core;
-using LudumDare54.Graphics;
 using Microsoft.AspNetCore.Components;
-using Newtonsoft.Json;
 
 namespace LudumDare54.Graphics.Pages;
 
@@ -20,12 +18,16 @@ public partial class Edit : EditorPanelManager {
     private readonly List<PanelData> _panels = new();
 
     [Inject]
-    public RepositoryFactory RepositoryFactory { get; set; }
+    public required RepositoryFactory RepositoryFactory { get; set; }
     public Boolean IsWriteable { get => RepositoryFactory is WriteableRepositoryFactory; }
 
     private Repository _repository = default!;
 
+    [Inject]
+    public required AudioPlayer AudioPlayer { get; set; }
+
     protected override async Task OnParametersSetAsync() {
+        _ = AudioPlayer.StopMusic();
         _repository = await RepositoryFactory.GetRepository();
 
         await base.OnParametersSetAsync();

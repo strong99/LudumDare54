@@ -3,7 +3,14 @@
 
 <div class="DeckSelectionState" />
 
-<p>
+<div class="preview">
+    <div class="inner" id="@_innerGuid">
+        
+    </div>
+</div>
+
+<p class="counter">
+    <span>You can only fit @State.Amount items in your backpack and pockets. What do you take on your perilous journey?</span>
     <span>@(State.Deck?.Count ?? 0)</span>
     <span>/</span>
     <span>@State.Amount</span>
@@ -14,12 +21,12 @@
         Session.Deck ??= new();
         var selected = State.Deck.Any(x=>x.Id.Equals(card.Id, StringComparison.OrdinalIgnoreCase));
         <li>
-            <button class="@(selected ? "selected" : "unselected")" @onclick="args=>Toggle(card)">@card.Id</button>
+            <button class="@(selected ? "selected" : "unselected")" @onclick="args=>Toggle(card)" @onmouseenter="OnCardHover">@card.Id</button>
         </li>
     }
 </ul>
 
-<button @onclick="args=>State.Finish()" disabled="@(!State.Deck.Any())"><span>Accept</span></button>
+<button @onclick="args=>{ OnSelect(); State.Finish();}" @onmouseenter="OnHover" disabled="@(!State.Deck.Any())"><span>Finish packing and start journey</span></button>
 
 @code {
     [Parameter]
@@ -34,6 +41,12 @@
     private Repository _repository = default!;
 
     protected void Toggle(ResourceCard card) {
+        if ((State.Deck?.Count ?? 0) >= 10) {
+            return;
+        }
+
+        OnCardSelect();
+
         if (State.Deck.Contains(card)) {
             State.Deck.Remove(card);
         } 

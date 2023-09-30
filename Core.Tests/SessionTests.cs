@@ -28,8 +28,8 @@ public class SessionTests {
 
         stateManager.InputCallback = state => {
             if (state is DeckSelectionState deckSelectionState) {
-                deckSelection ++;
-                for(var i = 0; i < deckSelectionState.Amount; i++) {
+                deckSelection++;
+                for (var i = 0; i < deckSelectionState.Amount; i++) {
                     deckSelectionState.Deck.Add(repository.ResourceCards[0]);
                 }
                 deckSelectionState.Finish();

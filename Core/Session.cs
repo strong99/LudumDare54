@@ -6,10 +6,14 @@ namespace LudumDare54.Core;
 public class Session {
     public List<String>? Deck { get; set; }
     public EventCard? EventCard { get; set; }
+    public ResourceCard? Choice { get; set; }
+    public OutcomeResult? Outcome { get; set; }
     public Boolean Active { get; set; } = true;
     public List<Tag> Tags { get; } = new();
 
     private Random _random = new();
+
+    public Int32 Round { get; set; } = 0;
 
     public async Task Play(Repository repository, StateManager stateManager) {
 
@@ -32,24 +36,43 @@ public class Session {
             stateManager.Inform(deckState.State);
             await deckState.Task;
 
-            Deck = deckState.State.Deck.Select(p=>p.Id).ToList();
+            Deck = deckState.State.Deck.Select(p => p.Id).ToList();
         }
 
-        EventCard = repository.EventCards[_random.Next(repository.EventCards.Count)];
-
-        var eventState = CardSelectionState.Create(EventCard, repository.ResourceCards.Where(x=>Deck.Contains(x.Id)).ToList());
-        stateManager.Inform(eventState.State);
-        await eventState.Task;
-
-        var choice = eventState.State.Choice;
-        if (choice is null) {
-            throw new Exception("Player should have made a choice before round finish. Something went wrong in the process");
+        if (EventCard is null) {
+            EventCard = repository.EventCards[_random.Next(repository.EventCards.Count)];
+            Choice = null;
         }
 
-        var result = EventCard.Apply(choice, this, stateManager);
+        if (Choice is null) { 
+            var eventState = CardSelectionState.Create(EventCard, repository.ResourceCards.Where(x => Deck.Contains(x.Id)).ToList());
+            stateManager.Inform(eventState.State);
+            await eventState.Task;
 
-        var resultState = CardResultState.Create(result.Id, result.Success);
+            Choice = eventState.State.Choice;
+            if (Choice is null) {
+                throw new Exception("Player should have made a choice before round finish. Something went wrong in the process");
+            }
+        }
+
+        if (Outcome is null) {
+            Outcome = EventCard.Apply(Choice, this, stateManager);
+        }
+
+        var resultState = CardResultState.Create(Outcome.Id, Outcome.Success);
         stateManager.Inform(resultState.State);
         await resultState.Task;
+
+        if (!Outcome.Success) {
+            Active = false;
+            Deck = null;
+            Tags.Clear();
+        }
+
+        Outcome = null;
+        Choice = null;
+        EventCard = null;
+
+        ++Round;
     }
 }

@@ -1,0 +1,28 @@
+﻿@using LudumDare54.Core.Scenes;
+
+<label class="position">
+    <span class="label">Position</span>
+    <input type="number" min="-500" max="500" step="1" @bind="Model.PositionX" />%
+    <input type="number" min="-500" max="500" step="1" @bind="Model.PositionY" />%
+</label>
+
+<label class="image">
+    <span class="label">Image</span>
+    <input type="text" @bind="Model.ImageFile" />
+    <img src="@Model.ImageFile" />
+</label>
+
+<label class="scale">
+    <span class="label">Scale</span>
+    <input type="number" min="0" max="500" step="1" @bind="Model.Scale" />%
+</label>
+
+<label class="chance">
+    <span class="label">Chance</span>
+    <input type="number" min="0" max="100" step="1" @bind="Model.Chance" />%
+</label>
+
+@code {
+    [Parameter]
+    public StaticAnchor Model { get; set; }
+}

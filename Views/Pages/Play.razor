@@ -3,9 +3,12 @@
 @using LudumDare54.Graphics.Pages.States
 
 <div class="play view">
-    <a href="/" class="menu"><span>Menu</span></a>
+    <a href="/" class="menu" @onclick="OnActivate" @onmouseenter="OnHover"><span>Menu</span></a>
 
-    @if (_state is DeckSelectionState deckSelectionState) {
+    @if (_state is ManualState manualState) {
+        <ManualStateComponent State="manualState" Session="_session" />
+    }
+    else if (_state is DeckSelectionState deckSelectionState) {
         <DeckSelectionStateComponent State="deckSelectionState" Session="_session" />
     }
     else if (_state is CardSelectionState cardSelectionState) {

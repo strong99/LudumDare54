@@ -79,3 +79,38 @@ li:has(> form > div > .delete:hover),
 li:has(> .delete:hover) {
     background: #fbb;
 }
+
+div > form > label.preview {
+    display: flex;
+    flex-direction: column;
+}
+
+div.preview {
+    position: relative;
+    background: #eee;
+    margin: 0.5em;
+    margin-left: 4em;
+    padding: 0;
+    width: 16em;
+    height: 9em;
+
+    > .inner {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform-origin: 0 0;
+        width: 1280px;
+        height: 720px;
+
+        > img {
+            position: absolute;
+        }
+    }
+
+    overflow: hidden;
+    list-style: none;
+
+    > img {
+        position: absolute;
+    }
+}

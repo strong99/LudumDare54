@@ -1,31 +1,45 @@
 ﻿using LudumDare54.Graphics;
-using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace LudumDare54.Web;
 
 public class WebSessionSettings : SessionSettings {
-    [Inject]
-    public required IJSRuntime JSRuntime { get; init; }
+    private IJSRuntime _jsRuntime;
 
-    private const String AudioEnabledKey = "audioEnabled";
-
-    public Boolean Audio {
-        get => _audio;
+    public Single MasterVolume {
+        get => _masterVolume;
         set {
-            _audio = value;
-            JSRuntime.InvokeVoidAsync("localStorage.setItem", AudioEnabledKey, value.ToString());
+            _masterVolume = value;
+            _jsRuntime.InvokeVoidAsync("localStorage.setItem", nameof(MasterVolume), (value * 100).ToString());
         }
     }
-    private Boolean _audio = true;
+    private Single _masterVolume = 1;
+    public Single SoundVolume {
+        get => _soundVolume;
+        set {
+            _soundVolume = value;
+            _jsRuntime.InvokeVoidAsync("localStorage.setItem", nameof(SoundVolume), (value * 100).ToString());
+        }
+    }
+    private Single _soundVolume = 1;
+    public Single MusicVolume {
+        get => _musicVolume;
+        set {
+            _musicVolume = value;
+            _jsRuntime.InvokeVoidAsync("localStorage.setItem", nameof(MusicVolume), (value * 100).ToString());
+        }
+    }
+    private Single _musicVolume = 1;
 
     public Task AwaitLoadingComplete { get; }
 
-    public WebSessionSettings() {
+    public WebSessionSettings(IJSRuntime jsRuntime) {
+        _jsRuntime = jsRuntime;
+
         AwaitLoadingComplete = Task.Run(async () => {
-            Audio = Boolean.Parse(
-                (await JSRuntime.InvokeAsync<String>("localStorage.getItem", AudioEnabledKey)) ?? "true"
-            );
+            _masterVolume = Int32.Parse(await _jsRuntime.InvokeAsync<String>("localStorage.getItem", nameof(MasterVolume)) ?? "100") / 100.0f;
+            _soundVolume = Int32.Parse(await _jsRuntime.InvokeAsync<String>("localStorage.getItem", nameof(SoundVolume)) ?? "100") / 100.0f;
+            _musicVolume = Int32.Parse(await _jsRuntime.InvokeAsync<String>("localStorage.getItem", nameof(MusicVolume)) ?? "100") / 100.0f;
         });
     }
 }

@@ -5,7 +5,7 @@
 <div class="settings view">
     <div class="panel">
         <header>
-            <a href="/" class="return"><span>Return</span></a>
+            <a href="/" class="return" @onclick="OnActivate" @onmouseenter="OnHover"><span>Return</span></a>
             <h1>Settings</h1>
         </header>
 
@@ -21,8 +21,18 @@
         }
 
         <label>
-            <span class="label">Audio</span>
-            <input type="checkbox" value="@SessionSettings.Audio" @onchange="args=>SessionSettings.Audio = !SessionSettings.Audio"/>
+            <span class="label">Master volume</span>
+            <input type="range" min="0" max="1" step="0.1" @bind="@SessionSettings.MasterVolume" />
+        </label>
+
+        <label>
+            <span class="label">Sound volume</span>
+            <input type="range" min="0" max="1" step="0.1" @bind="SessionSettings.SoundVolume" />
+        </label>
+
+        <label>
+            <span class="label">Music volume</span>
+            <input type="range" min="0" max="1" step="0.1" @bind="SessionSettings.MusicVolume" />
         </label>
     </div>
 </div>

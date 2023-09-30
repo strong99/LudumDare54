@@ -1,7 +1,5 @@
-﻿using LudumDare54.Graphics;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
-using System.Security.Cryptography.X509Certificates;
 
 namespace LudumDare54.Graphics.Pages;
 
@@ -19,6 +17,9 @@ public partial class Index {
     public required NavigationManager NavigationManager { get; set; }
 
     [Inject]
+    public required AudioPlayer AudioPlayer { get; set; }
+
+    [Inject]
     public required IServiceProvider ServiceProvider {
         get => _serviceProvider;
         set {
@@ -31,6 +32,7 @@ public partial class Index {
     public QuitApplicationFeature? _quitApplicationFeature;
 
     public void TryQuit() {
+        OnActivate();
         _quitApplicationFeature?.TryQuit();
     }
 
@@ -48,13 +50,35 @@ public partial class Index {
         return Task.CompletedTask;
     }
 
-    public void Continue() {
+    protected override void OnInitialized() {
+        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/menuButtonHover.wav");
+        AudioPlayer.Load("_content/LudumDare54.Graphics/audio/menuButtonSelect.wav");
+        PlayMusic();
+
+        base.OnInitialized();
+    }
+
+    public async Task Continue() {
+        OnActivate();
         SessionManager.GetOrCreate();
         NavigationManager.NavigateTo("/play");
     }
 
     public void StartNew() {
+        OnActivate();
         SessionManager.NewSession();
         NavigationManager.NavigateTo("/play");
+    }
+
+    public void OnHover() {
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonHover.wav");
+    }
+
+    public void OnActivate() {
+        AudioPlayer.Play("_content/LudumDare54.Graphics/audio/menuButtonSelect.wav");
+    }
+
+    public void PlayMusic() {
+        AudioPlayer.PlayMusic("_content/LudumDare54.Graphics/audio/background.wav");
     }
 }

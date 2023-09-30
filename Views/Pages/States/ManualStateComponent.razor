@@ -1,0 +1,18 @@
+﻿@using LudumDare54.Core;
+@using LudumDare54.Core.States;
+@using Microsoft.JSInterop;
+
+<div class="@State.Id ManualState" />
+
+<div class="preview">
+    <div class="inner" id="@_innerGuid">
+    </div>
+</div>
+
+<div class="text">
+    <p class="text subtitle">
+        @State.Text
+    </p>
+
+    <button @onclick="args=>{ OnSelect(); State.Finish();}" @onmouseenter="OnHover" class="progress"><span>Continue</span></button>
+</div>

@@ -12,6 +12,7 @@ public interface LoadableRepositoryFactory {
 }
 
 public interface WriteableRepositoryFactory : LoadableRepositoryFactory {
+    Task AddImage();
     void Save();
 }
 

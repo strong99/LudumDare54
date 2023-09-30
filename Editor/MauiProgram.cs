@@ -13,14 +13,15 @@ public static class MauiProgram {
 
         builder.Services.AddMauiBlazorWebView();
 
-        builder.Services.AddSingleton<SessionSettings, MauiSessionSettings>();
+        builder.Services.AddScoped<SessionSettings, MauiSessionSettings>();
         builder.Services.AddSingleton<RepositoryFactory, MemoryRepositoryCreator>();
-        builder.Services.AddSingleton<QuitApplicationFeature, MauiQuitApplicationFeature>();
-        builder.Services.AddSingleton<SessionManager>();
+        builder.Services.AddScoped<QuitApplicationFeature, MauiQuitApplicationFeature>();
+        builder.Services.AddScoped<SessionManager>();
+        builder.Services.AddScoped<AudioPlayer>();
 
 #if DEBUG
-		builder.Services.AddBlazorWebViewDeveloperTools();
-		builder.Logging.AddDebug();
+        builder.Services.AddBlazorWebViewDeveloperTools();
+        builder.Logging.AddDebug();
 #endif
 
         return builder.Build();

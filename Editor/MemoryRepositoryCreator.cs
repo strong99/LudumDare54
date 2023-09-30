@@ -27,7 +27,7 @@ public class MemoryRepositoryCreator : RepositoryFactory, WriteableRepositoryFac
                     filePath = overridePath;
                 }
             }
-            
+
             if (filePath.Contains(':') || filePath.StartsWith('/')) {
                 strData = File.ReadAllText(filePath);
             }
@@ -42,7 +42,7 @@ public class MemoryRepositoryCreator : RepositoryFactory, WriteableRepositoryFac
             Preferences.Default.Set("preset", filePath);
             return repository;
         }
-        catch(Exception e) {
+        catch (Exception e) {
             return new Repository();
         }
     }
@@ -61,6 +61,35 @@ public class MemoryRepositoryCreator : RepositoryFactory, WriteableRepositoryFac
             Directory.CreateDirectory(dirPath);
         }
         File.WriteAllText(filePath, strData);
+    }
+
+    public async Task AddImage() {
+        var files = await FilePicker.PickMultipleAsync();
+        foreach (var file in files) {
+            String filePath;
+
+            // Make relative, or skip
+            if (file.FullPath.Contains("wwwroot")) {
+                filePath = file.FullPath.Substring(file.FullPath.IndexOf("wwwroot") + "wwwroot".Length + 1);
+
+                if (await FileSystem.AppPackageFileExistsAsync(Path.Combine("wwwroot", filePath))) {
+
+                }
+                else if (await FileSystem.AppPackageFileExistsAsync(Path.Combine("wwwroot/_content/LudumDare54.Graphics", filePath))) {
+                    filePath = Path.Combine("_content/LudumDare54.Graphics", filePath);
+                }
+            }
+            else {
+                continue;
+            }
+
+            var image = new LudumDare54.Core.Scenes.Image() {
+                File = filePath,
+                Tags = new(),
+                Weight = 1
+            };
+            _repository.Images.Add(image);
+        }
     }
 
     public async Task SelectFile() {

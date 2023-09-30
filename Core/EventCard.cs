@@ -1,4 +1,5 @@
 ﻿using LudumDare54.Core.Conditions;
+using LudumDare54.Core.Tags;
 using System.Diagnostics.CodeAnalysis;
 
 namespace LudumDare54.Core;
@@ -8,6 +9,7 @@ public class EventCard {
     public List<Outcome> Outcome { get; set; } = new();
     public List<Condition> Conditions { get; set; } = new();
     public List<NextEventCard> Next { get; set; } = new();
+    public List<Tag> Tags { get; set; } = new();
     public OutcomeResult Apply(ResourceCard choice, Session session, StateManager stateManager) {
         foreach (var outcome in Outcome) {
             if (outcome.Can(choice, session)) {

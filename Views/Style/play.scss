@@ -1,8 +1,59 @@
 ﻿div.play.view {
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+
     button {
         background: white;
         border-radius: 0.5em;
         border: 1px solid black;
+
+        &:hover {
+            background-color: #eee;
+        }
+    }
+
+    > div.preview {
+        background-color: none;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        height: calc(100% - 8em);
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+        transform-origin: 0 0;
+        box-sizing: border-box;
+        align-items: center;
+
+        > .inner {
+            flex-shrink: 0;
+            position: relative;
+            transform-origin: center;
+        }
+    }
+
+    > p {
+        text-align: center;
+    }
+
+    > ul {
+        display: flex;
+        flex-direction: row;
+        place-content: center;
+        place-items: center;
+        list-style: none;
+        padding: 0;
+        gap: 0.5em;
+        flex-wrap: wrap;
+
+        > li > button {
+            display: block;
+            width: 6em;
+            height: 6em;
+        }
     }
 
     button.selected {
@@ -33,10 +84,35 @@
             display: none;
         }
     }
+
+    > div.text {
+        width: 40em;
+        margin: auto;
+        position: relative;
+        background: rgba(0,0,0,0.6);
+        color: white;
+        padding: 0.5em 1em;
+
+        button {
+            color: inherit;
+            padding: 0.5em 1em;
+            height:auto;
+            position:absolute;
+            right: -2em;
+            color: black;
+            bottom: 0;
+        }
+    }
 }
 
-div:has(> div.DeckSelectionState) {
+div:has(> div.DeckSelectionState) > .preview > .inner {
     background-image: url(../wwwroot/graphics/play/CardSelectionRoom.png);
+    background-size: cover;
+    background-position: center;
+}
+
+div:has(> div.intro01.ManualState) > .preview > .inner {
+    background-image: url(../wwwroot/graphics/play/IntroScene.png);
     background-size: cover;
     background-position: center;
 }

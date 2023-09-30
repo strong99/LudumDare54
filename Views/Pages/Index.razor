@@ -6,18 +6,18 @@
 
         <nav>
             @if (SessionManager.HasSession) {
-                <a href="/play" @onclick:preventDefault @onclick="Continue"><span>Continue story</span></a>
+                <a href="/play" @onclick:preventDefault @onclick="Continue" @onmouseenter="OnHover"><span>Continue story</span></a>
             }
-            <a href="/play" @onclick:preventDefault @onclick="StartNew"><span>New story</span></a>
+            <a href="/play" @onclick:preventDefault @onclick="StartNew" @onmouseenter="OnHover"><span>New story</span></a>
 
-            <a href="/settings"><span>Settings</span></a>
+            <a href="/settings" @onclick="OnActivate" @onmouseenter="OnHover"><span>Settings</span></a>
 
             @if (CanEditRepository) {
-                <a href="/editor"><span>Editor</span></a>
+                <a href="/editor" @onclick="OnActivate" @onmouseenter="OnHover"><span>Editor</span></a>
             }
 
             @if (CanQuit) {
-                <button type="button" @onclick="TryQuit"><span>Quit</span></button>
+                <button type="button" @onclick="TryQuit" @onmouseenter="OnHover"><span>Quit</span></button>
             }
         </nav>
     </div>

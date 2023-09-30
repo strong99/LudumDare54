@@ -1,6 +1,8 @@
 ﻿namespace LudumDare54.Graphics;
 
 public interface SessionSettings {
-    Boolean Audio { get; set; }
+    Single MasterVolume { get; set; }
+    Single SoundVolume { get; set; }
+    Single MusicVolume { get; set; }
     Task AwaitLoadingComplete { get; }
 }

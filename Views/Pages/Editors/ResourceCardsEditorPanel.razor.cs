@@ -9,13 +9,13 @@ public class ResourceCardsPanelData : PanelData {
 
 public partial class ResourceCardsEditorPanel {
     [Parameter]
-    public ResourceCardsPanelData Model { get; set; }
+    public required ResourceCardsPanelData Model { get; set; }
 
     [Parameter]
-    public EditorPanelManager Manager { get; set; }
+    public required EditorPanelManager Manager { get; set; }
 
     [Inject]
-    public RepositoryFactory RepositoryFactory { get; set; }
+    public required RepositoryFactory RepositoryFactory { get; set; }
 
 
     private Repository _repository = default!;

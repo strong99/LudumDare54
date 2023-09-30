@@ -10,7 +10,7 @@ public class ResourceCard {
     public ResourceCard() { }
 
     [SetsRequiredMembers]
-    public ResourceCard(String id, Boolean consumable) { 
+    public ResourceCard(String id, Boolean consumable) {
         Id = id;
         Consumable = consumable;
     }

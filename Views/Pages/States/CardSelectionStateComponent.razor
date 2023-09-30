@@ -1,52 +1,34 @@
 ﻿@using LudumDare54.Core;
+@using LudumDare54.Core.Scenes;
 @using LudumDare54.Core.States;
-<h3>CardSelectionStateComponent</h3>
-
+@using LudumDare54.Core.Tags;
+@using Microsoft.JSInterop;
 @{
     var deckCards = _repository.ResourceCards.Where(x => Session.Deck.Any(q => q == x.Id));
 }
+<div class="CardSelectionState" />
 
-<p>
+<div class="preview">
+    <div class="inner" id="@_innerGuid">
+        @{
+            var list = RenderScene().OrderBy(i => i.Order).ToList();
+            foreach (var item in list) {
+                <img style="@($"left: {item.PositionX}%; top: {item.PositionY}%; transform-origin: {item.OriginX}% {item.OriginY}%; transform: translate(-{item.OriginX}%, -{item.OriginY}%) scale({item.Scale / 100})")" src="@item.File" />
+            }
+        }
+    </div>
+</div>
+
+<p class="sceneDescription">
     @State.EventCard.Id
 </p>
 
-<ul>
-    @foreach(var card in deckCards) {
+<ul class="deck options">
+    @foreach (var card in deckCards) {
         Session.Deck ??= new();
         var selected = Session.Deck.Contains(card.Id);
         <li>
-            <button class="@(State.Choice == card ? "selected" : "unselected")" @onclick="args=>State.Choice = card">@card.Id</button>
+            <button class="@(State.Choice == card ? "selected" : "unselected")" @onclick="args=>{ OnCardSelect(); State.Choice = card; State.Finish(); }" @onmouseenter="OnCardHover">@card.Id</button>
         </li>
     }
 </ul>
-
-<button @onclick="args=>State.Finish()" disabled="@(State.Choice is null)"><span>Accept</span></button>
-
-@code {
-    [Parameter]
-    public required CardSelectionState State { get; set; }
-
-    [Parameter]
-    public required Session Session { get; set; }
-
-    [Inject]
-    public required RepositoryFactory RepositoryFactory { get; set; }
-
-    private Repository _repository = default!;
-
-    protected void Toggle(String eventCardId) {
-        Session.Deck ??= new();
-        if (Session.Deck.Contains(eventCardId)) {
-            Session.Deck.Remove(eventCardId);
-        } 
-        else {
-            Session.Deck.Add(eventCardId);
-        }
-    }
-
-    protected override async Task OnParametersSetAsync() {
-        _repository = await RepositoryFactory.GetRepository();
-
-        await base.OnParametersSetAsync();
-    }
-}

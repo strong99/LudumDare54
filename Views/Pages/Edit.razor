@@ -6,6 +6,8 @@
         <a href="/" class="return">Return</a>
         <button type="button" @onclick="args=>Add(new ResourceCardsPanelData())">Resource cards</button>
         <button type="button" @onclick="args=>Add(new EventCardsPanelData())">Event cards</button>
+        <button type="button" @onclick="args=>Add(new ScenesPanelData())">Scenes</button>
+        <button type="button" @onclick="args=>Add(new ImagesPanelData())">Images</button>
         @if (IsWriteable)
         {
             <button type="button" @onclick="Save" class="save">Save</button>
@@ -21,11 +23,23 @@
                 else if (panel is EventCardsPanelData eventCardsPanelData) {
                     <EventCardsEditorPanel Manager="this" Model="eventCardsPanelData" />
                 }
+                else if (panel is ScenesPanelData scenesPanelData) {
+                    <ScenesEditorPanel Manager="this" Model="scenesPanelData" />
+                }
+                else if (panel is ImagesPanelData imagesPanelData) {
+                    <ImagesEditorPanel Manager="this" Model="imagesPanelData" />
+                }
                 else if (panel is ResourceCardPanelData resourceCardPanelData) {
                     <ResourceCardEditorPanel Manager="this" Model="resourceCardPanelData" />
                 }
                 else if (panel is EventCardPanelData eventCardPanelData) {
                     <EventCardEditorPanel Manager="this" Model="eventCardPanelData" />
+                }
+                else if (panel is ScenePanelData sceneCardPanelData) {
+                    <SceneEditorPanel Manager="this" Model="sceneCardPanelData" />
+                }
+                else if (panel is ImagePanelData imagePanelData) {
+                    <ImageEditorPanel Manager="this" Model="imagePanelData" />
                 }
             </li>
         }
