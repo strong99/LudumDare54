@@ -8,7 +8,7 @@
 
     .panel {
         margin-top: 2em;
-        width: 20em;
+        width: 26em;
         display: flex;
         flex-direction: column;
         place-items: center;
@@ -35,16 +35,19 @@
 
         label {
             padding: 0.5em 1em;
-            background-color: rgba(0,0,0,0.1);
-            width: 15em;
+            background-color: white;
+            border-radius: 0.5em;
+            width: 25em;
             text-align: left;
+            box-shadow: black 1px 1px 2px;
 
             &:hover {
-                background-color: rgba(0,0,0,0.2);
+                box-shadow: black 2px 2px 4px;
             }
 
             > span.label {
                 width: 100%;
+                font-weight: 100;
             }
         }
     }

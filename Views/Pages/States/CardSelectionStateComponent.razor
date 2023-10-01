@@ -10,9 +10,8 @@
 
 <div class="preview">
     <div class="inner" id="@_innerGuid">
-        @{
-            var list = _sceneElements;
-            foreach (var item in list) {
+        @if (SceneManager.SceneElements is not null) {
+            foreach (var item in SceneManager.SceneElements) {
                 <img style="@($"left: {item.PositionX}%; top: {item.PositionY}%; transform-origin: {item.OriginX}% {item.OriginY}%; transform: translate(-{item.OriginX}%, -{item.OriginY}%) scale({item.Scale / 100})")" src="@item.File" />
             }
         }
@@ -28,7 +27,7 @@
         Session.Deck ??= new();
         var selected = Session.Deck.Contains(card.Id);
         <li>
-            <button class="@(State.Choice == card ? "selected" : "unselected")" @onclick="args=>{ OnCardSelect(); State.Choice = card; State.Finish(); }" @onmouseenter="OnCardHover">@card.Id</button>
+            <button class="@(State.Choice == card ? "selected" : "unselected")" @onclick="args=>{ OnCardSelect(); State.Choice = card; State.Finish(); }" @onmouseenter="OnCardHover">Use @card.Id</button>
         </li>
     }
 </ul>

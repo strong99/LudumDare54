@@ -10,6 +10,12 @@
             @if (condition is HasKeyTagCondition hasKeyTagCondition) {
                 <HasKeyTagConditionComponent Condition="hasKeyTagCondition" />
             }
+            else if (condition is IsRoundCondition isRoundCondition) {
+                <IsRoundConditionComponent Condition="isRoundCondition" />
+            }
+            else if (condition is WasRoundCondition wasRoundCondition) {
+                <WasRoundConditionComponent Condition="wasRoundCondition" />
+            }
             <button type="button" @onclick="args=>Conditions.Remove(condition)" class="delete"><span>Delete</span></button>
         </li>
     }
@@ -23,7 +29,3 @@
         <button type="button" @onclick="Add">Add</button>
     </li>
 </ul>
-
-@code {
-    
-}

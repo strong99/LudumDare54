@@ -3,7 +3,7 @@
 @using LudumDare54.Graphics.Pages.States
 
 <div class="play view">
-    <a href="/" class="menu" @onclick="OnActivate" @onmouseenter="OnHover"><span>Menu</span></a>
+    <a href="../" class="menu" @onclick="OnActivate" @onmouseenter="OnHover"><span>Menu</span></a>
 
     @if (_state is ManualState manualState) {
         <ManualStateComponent State="manualState" Session="_session" />
@@ -12,10 +12,10 @@
         <DeckSelectionStateComponent State="deckSelectionState" Session="_session" />
     }
     else if (_state is CardSelectionState cardSelectionState) {
-        <CardSelectionStateComponent State="cardSelectionState" Session="_session" />
+        <CardSelectionStateComponent State="cardSelectionState" Session="_session" SceneManager="this" />
     }
     else if (_state is CardResultState cardResultState) {
-        <CardResultStateComponent State="cardResultState" Session="_session" />
+        <CardResultStateComponent State="cardResultState" Session="_session" SceneManager="this" />
     }
     else {
         @_state?.GetType().Name

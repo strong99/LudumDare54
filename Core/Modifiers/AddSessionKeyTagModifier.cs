@@ -2,11 +2,11 @@
 
 namespace LudumDare54.Core.Modifiers;
 
-public class AddKeyTagModifier : Modifier {
+public class AddSessionKeyTagModifier : Modifier {
     public String Key { get; set; }
 
     public Task Apply(ResourceCard choice, Session session, StateManager stateManager) {
-        session.AllActiveTags.Add(new KeyTag(Key));
+        session.Tags.Add(new KeyTag(Key));
         return Task.CompletedTask;
     }
 }

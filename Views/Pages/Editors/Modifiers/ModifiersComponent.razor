@@ -10,8 +10,20 @@
             @if (modifier is AddKeyTagModifier addKeyTagModifier) {
                 <AddKeyTagModifierComponent Modifier="addKeyTagModifier" />
             }
+            else if (modifier is AddSessionKeyTagModifier addSessionKeyTagModifier) {
+                <AddSessionKeyTagModifierComponent Modifier="addSessionKeyTagModifier" />
+            }
             else if (modifier is RemoveKeyTagModifier removeKeyTagModifier) {
                 <RemoveKeyTagModifierComponent Modifier="removeKeyTagModifier" />
+            }
+            else if (modifier is RemoveSessionKeyTagModifier removeSessionKeyTagModifier) {
+                <RemoveSessionKeyTagModifierComponent Modifier="removeSessionKeyTagModifier" />
+            }
+            else if (modifier is ReplaceKeyTagModifier replaceKeyTagModifier) {
+                <ReplaceKeyTagModifierComponent Modifier="replaceKeyTagModifier" />
+            }
+            else if (modifier is ReplaceSessionKeyTagModifier replaceSessionKeyTagModifier) {
+                <ReplaceSessionKeyTagModifierComponent Modifier="replaceSessionKeyTagModifier" />
             }
             <button type="button" @onclick="args=>Modifiers.Remove(modifier)" class="delete"><span>Delete</span></button>
         </li>

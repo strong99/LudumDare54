@@ -1,5 +1,6 @@
 ﻿using LudumDare54.Core.States;
 using LudumDare54.Core.Tags;
+using System.ComponentModel.DataAnnotations;
 
 namespace LudumDare54.Core;
 
@@ -10,6 +11,7 @@ public class Session {
     public OutcomeResult? Outcome { get; set; }
     public Boolean Active { get; set; } = true;
     public List<Tag> Tags { get; } = new();
+    public List<Tag> AllActiveTags { get; } = new();
 
     private Random _random = new();
 
@@ -31,6 +33,9 @@ public class Session {
     }
 
     private async Task Progress(Repository repository, StateManager stateManager) {
+        AllActiveTags.Clear();
+        AllActiveTags.AddRange(Tags);
+
         if (Deck is null) {
             var deckState = DeckSelectionState.Create(10);
             stateManager.Inform(deckState.State);
@@ -40,11 +45,30 @@ public class Session {
         }
 
         if (EventCard is null) {
-            EventCard = repository.EventCards[_random.Next(repository.EventCards.Count)];
+            var availableCards = repository.EventCards.Where(c=>c.Conditions.All(x=>x.IsMet(null, this))).ToList();
+            if (availableCards.Count == 0) {
+                Active = false;
+                return;
+            }
+
+            var maxScore = 0.0f;
+            var weightedCards = new Dictionary<Single, EventCard>();
+            foreach(var card in availableCards) {
+                if (card.Weight <= 0) {
+                    continue;
+                }
+                maxScore += card.Weight;
+                weightedCards.Add(maxScore, card);
+            }
+
+            var idx =_random.NextDouble() * maxScore;
+            EventCard = weightedCards.First(x => idx < x.Key).Value;
+
             Choice = null;
         }
+        AllActiveTags.AddRange(EventCard.Tags);
 
-        if (Choice is null) { 
+        if (Choice is null) {
             var eventState = CardSelectionState.Create(EventCard, repository.ResourceCards.Where(x => Deck.Contains(x.Id)).ToList());
             stateManager.Inform(eventState.State);
             await eventState.Task;
@@ -63,7 +87,7 @@ public class Session {
         stateManager.Inform(resultState.State);
         await resultState.Task;
 
-        if (!Outcome.Success) {
+        if (Outcome.End) {
             Active = false;
             Deck = null;
             Tags.Clear();

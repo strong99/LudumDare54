@@ -24,6 +24,9 @@ public partial class CardResultStateComponent {
     private Random _random = new();
     private Int32 _randomIdx;
 
+    [Parameter]
+    public required SceneManager SceneManager { get; set; }
+
     protected override void OnInitialized() {
         _innerGuid = Guid.NewGuid();
         _randomIdx = _random.Next(0, 1000000);
@@ -32,6 +35,8 @@ public partial class CardResultStateComponent {
 
     protected override void OnParametersSet() {
         OnPlayResult();
+
+        SceneManager.GenerateAltScene(Session.AllActiveTags);
 
         base.OnParametersSet();
     }
@@ -51,6 +56,6 @@ public partial class CardResultStateComponent {
     }
 
     private void OnPlayResult() {
-        AudioPlayer.Play($"_content/LudumDare54.Graphics/audio/{(State.Success ? "success" : "failure")}.ogg");
+        AudioPlayer.Play($"_content/LudumDare54.Graphics/audio/{(State.Success ? "success" : "failure")}.ogg", true);
     }
 }

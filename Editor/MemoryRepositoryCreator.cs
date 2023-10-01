@@ -21,7 +21,7 @@ public class MemoryRepositoryCreator : RepositoryFactory, WriteableRepositoryFac
             var strData = default(String);
 
             var filePath = Preset;
-            if (!Preset.Contains(':') && !Preset.StartsWith('/') && !Preset.StartsWith("..")) {
+            if (!Preset.Contains(':') && !Preset.StartsWith('/') && !Preset.StartsWith("..") && !Preset.StartsWith(".")) {
                 var overridePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LudumDare54", Preset);
                 if (File.Exists(overridePath)) {
                     filePath = overridePath;
@@ -32,7 +32,7 @@ public class MemoryRepositoryCreator : RepositoryFactory, WriteableRepositoryFac
                 strData = File.ReadAllText(filePath);
             }
             else {
-                var stream = await FileSystem.OpenAppPackageFileAsync("wwwroot/_content/LudumDare54.Graphics/config/" + filePath);
+                var stream = await FileSystem.OpenAppPackageFileAsync("wwwroot/_content/LudumDare54.Graphics/config/" + filePath.Replace("./", ""));
                 var reader = new StreamReader(stream);
                 strData = await reader.ReadToEndAsync();
             }

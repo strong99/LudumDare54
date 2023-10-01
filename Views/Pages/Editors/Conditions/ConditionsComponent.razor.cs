@@ -5,7 +5,8 @@ namespace LudumDare54.Graphics.Pages.Editors.Conditions;
 public partial class ConditionsComponent {
     private Dictionary<String, Type> _availableConditionTypes = new() {
         ["Has key"] = typeof(HasKeyTagCondition),
-        ["Is round"] = typeof(IsRoundCondition)
+        ["Is round"] = typeof(IsRoundCondition),
+        ["Was round"] = typeof(WasRoundCondition)
     };
 
 

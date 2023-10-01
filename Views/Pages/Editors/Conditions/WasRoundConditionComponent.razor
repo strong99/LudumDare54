@@ -1,0 +1,16 @@
+﻿@using LudumDare54.Core.Conditions;
+@using LudumDare54.Core.Tags;
+
+<select @bind="Not">
+    <option value="False">Was</option>
+    <option value="True">Was not</option>
+</select> 
+<span>round</span>
+<input type="text" @bind="Condition.Round" />
+
+@code {
+    public String Not { get => Condition.Not.ToString(); set => Condition.Not = Boolean.Parse(value); }
+
+    [Parameter]
+    public required WasRoundCondition Condition { get; set; }
+}

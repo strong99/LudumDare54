@@ -20,6 +20,11 @@
 </label>
 
 <label>
+    <span class="label">@nameof(Outcome.End)</span>
+    <input type="checkbox" checked="@Outcome.End" @onchange="args=>Outcome.End=!Outcome.End" />
+</label>
+
+<label>
     <span class="label">Conditions</span>
 </label>
 <ConditionsComponent Conditions="Outcome.Conditions" />

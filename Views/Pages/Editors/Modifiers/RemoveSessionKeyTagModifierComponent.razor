@@ -1,0 +1,11 @@
+﻿@using LudumDare54.Core.Modifiers;
+@using LudumDare54.Core.Tags;
+
+<span>Remove</span> 
+<input type="text" @bind="Modifier.Key" /> 
+<span>from session</span>
+
+@code {
+    [Parameter]
+    public required RemoveSessionKeyTagModifier Modifier { get; set; }
+}

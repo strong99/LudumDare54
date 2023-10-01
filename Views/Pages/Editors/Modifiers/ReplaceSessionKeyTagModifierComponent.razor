@@ -1,0 +1,11 @@
+﻿@using LudumDare54.Core.Modifiers;
+@using LudumDare54.Core.Tags;
+
+<span>Replace</span> <input type="text" @bind="Modifier.RemoveKey" />
+<span>With</span> <input type="text" @bind="Modifier.AddKey" />
+<span>in session</span>
+
+@code {
+    [Parameter]
+    public required ReplaceSessionKeyTagModifier Modifier { get; set; }
+}

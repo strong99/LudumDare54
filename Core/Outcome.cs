@@ -11,6 +11,7 @@ public class Outcome {
     /// A hint whether this outcome should be seen as successful or not.
     /// </summary>
     public Boolean Success { get; set; } = true;
+    public Boolean End { get; set; } = false;
 
     public List<Condition> Conditions { get; set; } = new();
     public List<Modifier> Modifiers { get; set; } = new();

@@ -5,7 +5,11 @@ namespace LudumDare54.Graphics.Pages.Editors.Modifiers;
 public partial class ModifiersComponent {
     private Dictionary<String, Type> _availableModifierTypes = new() {
         ["Add key tag"] = typeof(AddKeyTagModifier),
-        ["Remove key tag"] = typeof(RemoveKeyTagModifier)
+        ["Add session key tag"] = typeof(AddSessionKeyTagModifier),
+        ["Remove key tag"] = typeof(RemoveKeyTagModifier),
+        ["Remove session key tag"] = typeof(RemoveSessionKeyTagModifier),
+        ["Replace key tag"] = typeof(ReplaceKeyTagModifier),
+        ["Replace session key tag"] = typeof(ReplaceSessionKeyTagModifier)
     };
 
 

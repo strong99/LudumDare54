@@ -13,6 +13,11 @@
         <input type="text" @bind="UniqueId" maxlength="64" />
     </label>
 
+    <label>
+        <span class="label">Weight</span>
+        <input type="text" @bind="Model.Card.Weight" min="0" max="9999" step="1" />
+    </label>
+
     <div class="tags">
         <label>
             <span class="label">Tags</span>

@@ -5,13 +5,16 @@
 
 <div class="preview">
     <div class="inner" id="@_innerGuid">
+        @if (SceneManager.SceneElements is not null) {
+            foreach (var item in SceneManager.SceneElements) {
+                <img style="@($"left: {item.PositionX}%; top: {item.PositionY}%; transform-origin: {item.OriginX}% {item.OriginY}%; transform: translate(-{item.OriginX}%, -{item.OriginY}%) scale({item.Scale / 100})")" src="@item.File" />
+            }
+        }
     </div>
 </div>
 
-<p>
+<p class="sceneDescription">
     @State.OutcomeId
-    - 
-    @State.Success
 </p>
 
 <button @onclick="args=>{OnSelect(); State.Finish();}" @onmouseenter="OnHover"><span>Continue</span></button>
