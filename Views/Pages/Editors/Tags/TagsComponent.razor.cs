@@ -22,6 +22,10 @@ public partial class TagsComponent {
             return;
         }
 
+        if (!_availableTagTypes.ContainsKey(NewTagType)) {
+            return;
+        }
+
         var tagType = _availableTagTypes[NewTagType];
         var tag = Activator.CreateInstance(tagType, NewTagKey) as Tag ?? throw new ArgumentNullException();
 

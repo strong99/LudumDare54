@@ -8,6 +8,7 @@
         <button type="button" @onclick="args=>Add(new EventCardsPanelData())">Event cards</button>
         <button type="button" @onclick="args=>Add(new ScenesPanelData())">Scenes</button>
         <button type="button" @onclick="args=>Add(new ImagesPanelData())">Images</button>
+        <button type="button" @onclick="args=>Add(new SceneViewerPanelData())">Preview</button>
         @if (IsWriteable)
         {
             <button type="button" @onclick="Save" class="save">Save</button>
@@ -40,6 +41,9 @@
                 }
                 else if (panel is ImagePanelData imagePanelData) {
                     <ImageEditorPanel Manager="this" Model="imagePanelData" />
+                }
+                else if (panel is SceneViewerPanelData sceneViewerPanelData) {
+                    <SceneViewerPanel Manager="this" Model="sceneViewerPanelData" />
                 }
             </li>
         }

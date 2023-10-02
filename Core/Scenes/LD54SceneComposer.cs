@@ -1,5 +1,6 @@
 ﻿using LudumDare54.Core.Tags;
 using System.Diagnostics;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace LudumDare54.Core.Scenes;
 
@@ -75,6 +76,9 @@ public class LD54SceneComposer : SceneComposer {
 
     public IEnumerable<ImageToRender> GenerateScene(IEnumerable<Tag> tags, Boolean newScene = true) {
         var renderList = new List<ImageToRender>();
+        var renderScene = default(Scene);
+        var anchors = new List<String>();
+        var paths = new List<String>();
 
         var final = default(List<ScenePath>);
         var scenes = _repository.Scenes.OrderBy(s => Guid.NewGuid()).ToList();
@@ -107,12 +111,11 @@ public class LD54SceneComposer : SceneComposer {
 
                 if (!toRequiredTags.Any()) {
                     final = finalSet;
+                    renderScene = scene;
                     break;
                 }
             }
             if (final is not null) {
-                var anchors = new List<String>();
-                var paths = new List<String>();
                 foreach (var ScenePath in final) {
                     var root = scene.Anchors;
                     var offsetX = 0.0f;
@@ -147,15 +150,18 @@ public class LD54SceneComposer : SceneComposer {
                     }
                 }
 
-                var i = 0;
-                //var list = new List<ImageToRender>();
-                foreach (var anchor in scene.Anchors) {
-                    renderList.AddRange(RenderAnchor(anchor, new ScenePath(scene, new Tag[0]), anchors, paths, "/" + i, "/" + i));
-                    ++i;
-                }
-
                 break;
             }
+        }
+
+        if (renderScene is null) {
+            renderScene = scenes[_random.Next(scenes.Count)];
+        }
+
+        var i = 0;
+        foreach (var anchor in renderScene.Anchors) {
+            renderList.AddRange(RenderAnchor(anchor, new ScenePath(renderScene, Array.Empty<Tag>()), anchors, paths, "/" + i, "/" + i));
+            ++i;
         }
 
         return SceneElements = renderList.OrderBy(i => i.Order).ToList();
@@ -178,7 +184,7 @@ public class LD54SceneComposer : SceneComposer {
                     weightedItems.Add(maxScore, item);
                 }
                 var idx = _random.NextDouble() * maxScore;
-                visual = weightedItems.Last(p => idx < p.Key).Value;
+                visual = weightedItems.First(p => idx < p.Key).Value;
             }
             else {
                 visual = _repository.Images.FirstOrDefault(i => paths.Contains(path + ":" + i.File));
