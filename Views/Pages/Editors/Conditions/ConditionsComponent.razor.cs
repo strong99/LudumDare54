@@ -13,7 +13,7 @@ public partial class ConditionsComponent {
     [Parameter]
     public required List<Condition> Conditions { get; set; }
 
-    protected string NewConditionType { get; set; } = "Has key";
+    protected string NewConditionType { get; set; } = "";
 
     protected void Add() {
         var conditionType = _availableConditionTypes[NewConditionType];
@@ -21,6 +21,6 @@ public partial class ConditionsComponent {
 
         Conditions.Add(condition);
 
-        NewConditionType = _availableConditionTypes.Keys.First();
+        NewConditionType = "";
     }
 }

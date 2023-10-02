@@ -104,7 +104,7 @@ public partial class Play : SceneManager {
 
         _ = _session.Play(_repository, _stateManager).ContinueWith(t => {
             _state = new ManualState("credits", "Created for Ludum Dare 54 by Strong99 in 48 hours from Scratch, 2023/09/30 - 2023/10/01", () => {
-                NavigationManager.NavigateTo("../");
+                NavigationManager.NavigateTo("");
                 StateHasChanged();
             });
             InvokeAsync(() => StateHasChanged());

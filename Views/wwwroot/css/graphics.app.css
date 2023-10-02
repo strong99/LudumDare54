@@ -54,6 +54,7 @@ html, body, div#app, main, div.page, div.view, div.panel, article {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 .edit.view > ul.panels > li > form.main {
   overflow-y: auto;
@@ -122,14 +123,87 @@ html, body, div#app, main, div.page, div.view, div.panel, article {
   text-align: left;
   width: 100%;
 }
-
-button > img {
+.edit.view .list.control {
+  display: flex;
+  flex-direction: column;
+}
+.edit.view .list.control > header {
+  display: flex;
+  flex-direction: row;
+}
+.edit.view .list.control > header > span {
+  width: 100%;
+}
+.edit.view button > img {
   max-width: 100%;
   max-height: 10em;
 }
-
+.edit.view :is(div, li, label):not(:has(:is(div, li, label):hover)):has(:hover) {
+  background: rgba(0, 0, 0, 0.1);
+}
+.edit.view :is(div, li, label):not(:has(:is(div, li, label):hover)):has(:hover) input, .edit.view :is(div, li, label):not(:has(:is(div, li, label):hover)):has(:hover) select {
+  background: rgba(0, 0, 0, 0.05);
+}
 .edit.view > ul.panels > li.EventCardsPanelData, .edit.view > ul.panels > li.ResourceCardsPanelData {
   width: 18em;
+}
+.edit.view label {
+  margin-top: 0.5em;
+  display: flex;
+  flex-direction: row;
+}
+.edit.view label > span.label {
+  width: 5em;
+  padding: 0.2em 0.5em;
+  padding-left: 0;
+}
+.edit.view label > span.label.main {
+  width: auto;
+}
+.edit.view ul {
+  border-left: 1px solid gray;
+  margin-left: 0.2em;
+  padding-left: 0.8em;
+  list-style: none;
+}
+.edit.view ul > li {
+  position: relative;
+}
+.edit.view ul > li:before {
+  content: "•";
+  position: absolute;
+  left: -0.75em;
+  margin-top: -0.1em;
+  width: 0;
+  overflow: visible;
+  font-size: 1.5em;
+  display: inline-block;
+  color: gray;
+}
+.edit.view ul > li > div {
+  display: flex;
+  flex-direction: row;
+}
+.edit.view ul > li > div > span {
+  margin-right: 0.25em;
+  box-sizing: border-box;
+  font-size: inherit;
+  padding: 0.25em 0.5em;
+  height: 2em;
+}
+.edit.view ul:has(:hover):not(:has(ul :hover)) {
+  border-left: 1px solid black;
+}
+.edit.view ul:has(:hover):not(:has(ul :hover)) > li:before {
+  color: black;
+}
+
+.form_input, .edit.view label > input, .edit.view label select, .edit.view ul > li > div > input, .edit.view ul > li > div select {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: inherit;
+  padding: 0.25em 0.5em;
+  height: 2em;
 }
 
 div.menu.view {
@@ -384,27 +458,26 @@ div.edit.view > nav {
   flex-shrink: 0;
 }
 
-label {
-  margin-top: 0.5em;
-  display: flex;
-  flex-direction: row;
-}
-label > span.label {
-  width: 5em;
-}
-label > span.label.main {
-  width: auto;
+input, select {
+  padding: 0.2em 0.5em;
+  box-sizing: border-box;
 }
 
 ul.tags {
   margin-bottom: 0.5em;
 }
-ul.tags > li {
+ul.tags > li, ul.tags > li > div {
   display: flex;
+  flex-direction: row;
   width: 100%;
 }
-ul.tags > li > input {
+ul.tags > li > div > input, ul.tags > li > div > label {
   width: 100%;
+  padding: 0.2em 0.5em;
+  box-sizing: border-box;
+}
+ul.tags > li > div > input:first-child, ul.tags > li > div > label:first-child {
+  margin-top: 0;
 }
 
 button.return:before,
@@ -428,6 +501,7 @@ ul.next > li > label {
 }
 ul.next > li > label > .label {
   width: 100%;
+  padding: 0.2em 0.5em;
 }
 ul.next > li > label > input {
   width: 3.2em;

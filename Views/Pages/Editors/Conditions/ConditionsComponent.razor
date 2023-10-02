@@ -7,20 +7,22 @@
 <ul class="conditions">
     @foreach (var condition in Conditions) {
         <li>
-            @if (condition is HasKeyTagCondition hasKeyTagCondition) {
-                <HasKeyTagConditionComponent Condition="hasKeyTagCondition" />
-            }
-            else if (condition is IsRoundCondition isRoundCondition) {
-                <IsRoundConditionComponent Condition="isRoundCondition" />
-            }
-            else if (condition is WasRoundCondition wasRoundCondition) {
-                <WasRoundConditionComponent Condition="wasRoundCondition" />
-            }
-            <button type="button" @onclick="args=>Conditions.Remove(condition)" class="delete"><span>Delete</span></button>
+            <div>
+                @if (condition is HasKeyTagCondition hasKeyTagCondition) {
+                    <HasKeyTagConditionComponent Condition="hasKeyTagCondition" />
+                }
+                else if (condition is IsRoundCondition isRoundCondition) {
+                    <IsRoundConditionComponent Condition="isRoundCondition" />
+                }
+                else if (condition is WasRoundCondition wasRoundCondition) {
+                    <WasRoundConditionComponent Condition="wasRoundCondition" />
+                }
+                <button type="button" @onclick="args=>Conditions.Remove(condition)" class="delete"><span>Delete</span></button>
+            </div>
         </li>
     }
     <li>
-        <input type="text" list="@conditionTypesId" @bind="NewConditionType" />
+        <input type="text" list="@conditionTypesId" @bind="NewConditionType" placeholder="Condition" />
         <datalist id="@conditionTypesId">
             @foreach (var tag in _availableConditionTypes) {
                 <option>@tag.Key</option>

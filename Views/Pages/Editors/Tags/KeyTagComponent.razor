@@ -1,10 +1,10 @@
 ﻿@using LudumDare54.Core.Tags;
 
-<label class="keyTag">
-    <span class="label">@Model.Key</span>
+<label class="keyTag simple control">
+    <span class="label main">@Model.Key</span>
 </label>
 
 @code {
     [Parameter]
-    public KeyTag Model { get; set; }
+    public required KeyTag Model { get; set; }
 }

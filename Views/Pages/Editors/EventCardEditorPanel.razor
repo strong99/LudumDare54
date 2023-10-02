@@ -8,34 +8,34 @@
 </header>
 
 <form @onsubmit:preventDefault class="main">
-    <label>
+    <label class="simple control">
         <span class="label">Name</span>
         <input type="text" @bind="UniqueId" maxlength="64" />
     </label>
 
-    <label>
+    <label class="simple control">
         <span class="label">Weight</span>
         <input type="text" @bind="Model.Card.Weight" min="0" max="9999" step="1" />
     </label>
 
-    <div class="tags">
-        <label>
+    <div class="tags list control">
+        <header>
             <span class="label">Tags</span>
-        </label>
+        </header>
         <TagsComponent Tags="Model.Card.Tags" />
     </div>
 
-    <div class="conditions">
-        <label>
+    <div class="conditions list control">
+        <header>
             <span class="label">Conditions</span>
-        </label>
+        </header>
         <ConditionsComponent Conditions="Model.Card.Conditions" />
     </div>
 
-    <div class="outcomes">
-        <label>
+    <div class="outcomes list control">
+        <header>
             <span class="label">Outcomes</span>
-        </label>
+        </header>
         <OutcomesComponent Outcomes="Model.Card.Outcome" />
     </div>
 

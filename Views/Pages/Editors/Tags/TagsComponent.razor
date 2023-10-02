@@ -6,20 +6,24 @@
 <ul class="tags">
     @foreach (var tag in Tags) {
         <li class="@(tag.GetType()?.Name) createNew">
-            @if (tag is KeyTag simpleTag) {
-                <KeyTagComponent Model="simpleTag" />
-            }
-            <button type="button" @onclick="args=>Tags.Remove(tag)" class="delete"><span>Remove</span></button>
+            <div>
+                @if (tag is KeyTag simpleTag) {
+                    <KeyTagComponent Model="simpleTag" />
+                }
+                <button type="button" @onclick="args=>Tags.Remove(tag)" class="delete"><span>Remove</span></button>
+            </div>
         </li>
     }
     <li>
-        <input type="text" @bind="NewTagKey" />
-        <input type="text" list="@tagTypesId" @bind="NewTagType" />
-        <datalist id="@tagTypesId">
-            @foreach (var tag in _availableTagTypes) {
-                <option>@tag.Key</option>
-            }
-        </datalist>
+        <div>
+            <input type="text" @bind="NewTagKey" />
+            <input type="text" list="@tagTypesId" @bind="NewTagType" placeholder="Tag type" />
+            <datalist id="@tagTypesId">
+                @foreach (var tag in _availableTagTypes) {
+                    <option>@tag.Key</option>
+                }
+            </datalist>
+        </div>
         <button type="button" @onclick="AddTag">Add</button>
     </li>
 </ul>

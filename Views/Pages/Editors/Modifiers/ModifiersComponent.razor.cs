@@ -16,14 +16,18 @@ public partial class ModifiersComponent {
     [Parameter]
     public required List<Modifier> Modifiers { get; set; }
 
-    protected string NewModifierType { get; set; } = "Add key tag";
+    protected string NewModifierType { get; set; } = "";
 
     protected void Add() {
+        if (!_availableModifierTypes.ContainsKey(NewModifierType)) {
+            return;
+        }
+
         var modifierType = _availableModifierTypes[NewModifierType];
         var modifier = Activator.CreateInstance(modifierType) as Modifier ?? throw new ArgumentNullException();
 
         Modifiers.Add(modifier);
 
-        NewModifierType = _availableModifierTypes.Keys.First();
+        NewModifierType = "";
     }
 }

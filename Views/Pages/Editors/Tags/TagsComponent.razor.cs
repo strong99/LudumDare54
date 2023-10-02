@@ -7,8 +7,9 @@ public partial class TagsComponent {
     [Parameter]
     public List<Tag> Tags { get; set; }
 
-    protected string NewTagKey { get; set; }
-    protected string NewTagType { get; set; } = "Tag";
+    protected String NewTagKey { get; set; } = "";
+
+    protected String NewTagType { get; set; } = "";
 
     protected Dictionary<string, Type> _availableTagTypes = new() {
         ["Tag"] = typeof(KeyTag)
@@ -27,6 +28,6 @@ public partial class TagsComponent {
         Tags.Add(tag);
 
         NewTagKey = "";
-        NewTagType = "Tag";
+        NewTagType = "";
     }
 }

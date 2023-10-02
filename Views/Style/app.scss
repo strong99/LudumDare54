@@ -13,36 +13,36 @@
 @import 'play.scss';
 
 div.edit.view {
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
 
     > nav {
         flex-shrink: 0;
     }
 }
-
-label {
-    margin-top: 0.5em;
-    display: flex;
-    flex-direction: row;
-
-    > span.label {
-        width: 5em;
-
-        &.main {
-            width: auto;
-        }
-    }
+input, select {
+    padding: 0.2em 0.5em;
+    box-sizing: border-box;
 }
 
 ul.tags {
     margin-bottom: 0.5em;
 
-    > li {
+    > li, > li > div {
         display: flex;
-        width:100%;
-        > input {
-            width:100%;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    > li > div {
+        > input, > label {
+            width: 100%;
+            padding: 0.2em 0.5em;
+            box-sizing: border-box;
+
+            &:first-child {
+                margin-top: 0;
+            }
         }
     }
 }
@@ -68,7 +68,9 @@ ul.next > li {
 
         > .label {
             width: 100%;
+            padding: 0.2em 0.5em;
         }
+
         > input {
             width: 3.2em;
         }

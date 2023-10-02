@@ -24,15 +24,19 @@
     <input type="checkbox" checked="@Outcome.End" @onchange="args=>Outcome.End=!Outcome.End" />
 </label>
 
-<label>
-    <span class="label">Conditions</span>
-</label>
-<ConditionsComponent Conditions="Outcome.Conditions" />
+<div class="conditions list control">
+    <header>
+        <span class="label">Conditions</span>
+    </header>
+    <ConditionsComponent Conditions="Outcome.Conditions" />
+</div>
 
-<label>
-    <span class="label">Modifiers</span>
-</label>
-<ModifiersComponent Modifiers="Outcome.Modifiers" />
+<div class="conditions list control">
+    <header>
+        <span class="label">Modifiers</span>
+    </header>
+    <ModifiersComponent Modifiers="Outcome.Modifiers" />
+</div>
 
 <label>
     <span class="label main">Next [Optional]</span>
