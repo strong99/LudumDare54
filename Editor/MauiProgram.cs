@@ -1,4 +1,5 @@
-﻿using LudumDare54.Graphics;
+﻿using LudumDare54.Core.Scenes;
+using LudumDare54.Graphics;
 using Microsoft.Extensions.Logging;
 
 namespace LudumDare54.Editor;
@@ -16,6 +17,7 @@ public static class MauiProgram {
         builder.Services.AddScoped<SessionSettings, MauiSessionSettings>();
         builder.Services.AddSingleton<RepositoryFactory, MemoryRepositoryCreator>();
         builder.Services.AddScoped<QuitApplicationFeature, MauiQuitApplicationFeature>();
+        builder.Services.AddScoped<SceneComposerFactory, SceneManagerFactory<LD54SceneComposer>>();
         builder.Services.AddScoped<SessionManager>();
         builder.Services.AddScoped<AudioPlayer>();
 

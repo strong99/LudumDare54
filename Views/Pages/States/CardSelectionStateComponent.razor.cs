@@ -1,4 +1,5 @@
 ﻿using LudumDare54.Core;
+using LudumDare54.Core.Scenes;
 using LudumDare54.Core.States;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -16,15 +17,13 @@ public partial class CardSelectionStateComponent {
     public required IJSRuntime JSRuntime { get; set; }
 
     [Parameter]
-    public required SceneManager SceneManager { get; set; }
+    public required SceneComposer SceneManager { get; set; }
 
     private Guid _innerGuid;
     private Random _random = new();
-    private Int32 _randomIdx;
 
     protected override void OnInitialized() {
         _innerGuid = Guid.NewGuid();
-        _randomIdx = _random.Next(0, 1000000);
         base.OnInitialized();
     }
 

@@ -1,4 +1,5 @@
 ﻿using LudumDare54.Core;
+using LudumDare54.Core.Scenes;
 
 namespace LudumDare54.Graphics;
 
@@ -27,4 +28,20 @@ public class SessionManager {
 
 public interface QuitApplicationFeature {
     void TryQuit();
+}
+
+public interface SceneComposerFactory {
+    Task<SceneComposer> Create();
+}
+
+public class SceneManagerFactory<TType> : SceneComposerFactory where TType : class, SceneComposer {
+    private readonly RepositoryFactory _repositoryFactory;
+    public SceneManagerFactory(RepositoryFactory repositoryFactory) {
+        _repositoryFactory = repositoryFactory;
+    }
+
+    public async Task<SceneComposer> Create() {
+        var repository = await _repositoryFactory.GetRepository();
+        return (TType)Activator.CreateInstance(typeof(TType), repository)!;
+    }
 }

@@ -12,10 +12,10 @@
         <DeckSelectionStateComponent State="deckSelectionState" Session="_session" />
     }
     else if (_state is CardSelectionState cardSelectionState) {
-        <CardSelectionStateComponent State="cardSelectionState" Session="_session" SceneManager="this" />
+        <CardSelectionStateComponent State="cardSelectionState" Session="_session" SceneManager="_sceneComposer" />
     }
     else if (_state is CardResultState cardResultState) {
-        <CardResultStateComponent State="cardResultState" Session="_session" SceneManager="this" />
+        <CardResultStateComponent State="cardResultState" Session="_session" SceneManager="_sceneComposer" />
     }
     else {
         @_state?.GetType().Name
