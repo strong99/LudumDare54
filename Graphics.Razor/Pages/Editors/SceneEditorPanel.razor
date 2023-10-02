@@ -1,0 +1,73 @@
+@using LudumDare54.Core.Scenes;
+@using LudumDare54.Graphics.Razor.Pages.Editors.Anchors
+@using LudumDare54.Graphics.Razor.Pages.Editors.Shared
+@using LudumDare54.Graphics.Razor.Pages.Editors.Tags
+<header>
+    <button class="return" @onclick="args=>Manager.Swap(Model, new ScenesPanelData())"><span>Return</span></button>
+    <h2>Scene</h2>
+    <button class="close" @onclick="args=>Manager.Remove(Model)"><span>Close</span></button>
+</header>
+
+<form @onsubmit:preventDefault class="main">
+    <label>
+        <span class="label">Name</span>
+        <input type="text" @bind="UniqueId" maxlength="64" />
+    </label>
+
+    <div class="tags">
+        <label>
+            <span class="label">Tags</span>
+        </label>
+        <TagsComponent Tags="Model.Scene.Tags" />
+    </div>
+
+    <div class="preview">
+        <div class="inner" id="@_innerGuid">
+            @foreach (var anchor in Model.Scene.Anchors) {
+                @RenderAnchor(anchor);
+            }
+        </div>
+    </div>
+    <button type="button" @onclick="args=>_=true">Renew</button>
+
+    <div>
+        <label>
+            <span class="label">Anchors</span>
+        </label>
+        <AnchorsComponent Anchors="Model.Scene.Anchors" />
+    </div>
+
+    <div>
+        <button class="delete" type="button" @onclick="Delete"><span>Delete</span></button>
+    </div>
+</form>
+
+@code {
+    public String UniqueId {
+        get => Model.Scene.Id;
+        set {
+            if (_repository.EventCards.Any(p => p.Id.Equals(value, StringComparison.OrdinalIgnoreCase))) {
+                return;
+            }
+
+            Model.Scene.Id = value;
+        }
+    }
+
+    public RenderFragment RenderAnchor(Anchor anchor, Single offsetX = 0, Single offsetY = 0) {
+        Image? visual = null;
+        if (anchor is StaticSelectingAnchor staticSelectingAnchor) {
+            var query = _repository.Images.Where(p => staticSelectingAnchor.Tags.All(t => p.Tags.Any(x => x.Key.Equals(t.Key, StringComparison.OrdinalIgnoreCase))));
+            visual = query.Skip(_random.Next(query.Count())).FirstOrDefault();
+        }
+        if (visual is null || _random.Next(100) > anchor.Chance) {
+            return @<text></text>;
+        }
+        return @<text>
+        <img style="@($"left: {anchor.PositionX}%; top: {anchor.PositionY}%; transform-origin: {visual.OriginX}% {visual.OriginY}%; transform: translate(-{visual.OriginX + offsetX}%, -{visual.OriginY + offsetY}%) scale({anchor.Scale / 100})")" src="@visual.File" />
+            @foreach (var subAnchor in visual.Anchors) {
+                @RenderAnchor(subAnchor)
+            }
+        </text>;
+    }
+}

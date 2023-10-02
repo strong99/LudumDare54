@@ -1,0 +1,43 @@
+﻿@using LudumDare54.Core.Conditions;
+@using LudumDare54.Core.Tags;
+@using LudumDare54.Core;
+@using LudumDare54.Graphics.Razor.Pages.Editors.Conditions
+@using LudumDare54.Graphics.Razor.Pages.Editors.Modifiers
+
+<datalist id="AllEventCards">
+    @foreach(var card in _repository.EventCards) {
+        <option>@card.Id</option>
+    }
+</datalist>
+
+<ul class="outcomes">
+    @foreach (var outcome in Outcomes) {
+        <li>
+            <OutcomeComponent Outcome="outcome" />
+            <button type="button" @onclick="args=>Outcomes.Remove(outcome)" class="delete"><span>Remove</span></button>
+        </li>
+    }
+    <li>
+        <button type="button" @onclick="Add">Add</button>
+    </li>
+</ul>
+
+@code {
+    [Parameter]
+    public required List<Outcome> Outcomes { get; set; }
+
+    [Inject]
+    public required RepositoryFactory RepositoryFactory { get; set; }
+
+    private Repository _repository = default!;
+
+    protected override async Task OnParametersSetAsync() {
+        _repository = await RepositoryFactory.GetRepository();
+    }
+
+    public void Add() {
+        Outcomes.Add(new Outcome() {
+            Id = Guid.NewGuid().ToString(),
+        });
+    }
+}

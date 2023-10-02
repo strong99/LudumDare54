@@ -1,0 +1,38 @@
+@using LudumDare54.Graphics.Razor.Pages.Editors.Shared
+@using LudumDare54.Graphics.Razor.Pages.Editors.Tags
+<header>
+    <button class="return" @onclick="args=>Manager.Swap(Model, new ResourceCardsPanelData())"><span>Return</span></button>
+    <h2>Resource card</h2>
+    <button class="close" @onclick="args=>Manager.Remove(Model)"><span>Close</span></button>
+</header>
+
+<form @onsubmit:preventDefault class="main">
+    <label>
+        <span class="label">Name</span>
+        <input type="text" @bind="UniqueId" maxlength="64" />
+    </label>
+
+    <div class="tags">
+        <label>
+            <span class="label">Tags</span>
+        </label>
+        <TagsComponent Tags="Model.Card.Tags" />
+    </div>
+
+    <div>
+        <button class="delete" type="button" @onclick="Delete"><span>Delete</span></button>
+    </div>
+</form>
+
+@code {
+    public String UniqueId {
+        get => Model.Card.Id;
+        set {
+            if (_repository.EventCards.Any(p => p.Id.Equals(value, StringComparison.OrdinalIgnoreCase))) {
+                return;
+            }
+
+            Model.Card.Id = value;
+        }
+    }
+}

@@ -5,15 +5,15 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{A370C1F0-0C03-43BE-8E3D-C148ABDABF9F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUI", "Editor\MAUI.csproj", "{DCA27E1A-9A52-43D9-87B4-06DEA0AC3755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.MAUI", "Client.Maui\Client.MAUI.csproj", "{DCA27E1A-9A52-43D9-87B4-06DEA0AC3755}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{0D7B4933-8B78-4D1D-9CAE-E1A626E08E61}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{AAEF7CD5-B715-4D92-BB7D-BDDA4B427E2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graphics", "Views\Graphics.csproj", "{27AE4B0A-C540-4AD0-B445-7CC20FE137A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graphics.Razor", "Graphics.Razor\Graphics.Razor.csproj", "{27AE4B0A-C540-4AD0-B445-7CC20FE137A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Player\Web.csproj", "{1C7F8ED8-5EBB-4285-AC47-3D3077653736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Web", "Client.Web\Client.Web.csproj", "{1C7F8ED8-5EBB-4285-AC47-3D3077653736}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6105AD4E-3C6A-4E0D-9172-D3A93E82EE42}"
 	ProjectSection(SolutionItems) = preProject

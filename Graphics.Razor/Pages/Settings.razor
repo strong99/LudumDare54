@@ -1,0 +1,38 @@
+﻿@page "/settings"
+@using LudumDare54.Core.States;
+@using LudumDare54.Graphics.Razor.Pages.States
+
+<div class="settings view">
+    <div class="panel">
+        <header>
+            <a href="/" class="return" @onclick="OnActivate" @onmouseenter="OnHover"><span>Return</span></a>
+            <h1>Settings</h1>
+        </header>
+
+        @if (CanSelectRepository) {
+            <fieldset>
+                <legend>Config</legend>
+                <label>
+                    <span class="label">Preset</span>
+                    <input type="text" @bind="Preset" />
+                    <button type="button" @onclick="Select">Select</button>
+                </label>
+            </fieldset>
+        }
+
+        <label>
+            <span class="label">Master volume</span>
+            <input type="range" min="0" max="1" step="0.1" @bind="@SessionSettings.MasterVolume" />
+        </label>
+
+        <label>
+            <span class="label">Sound volume</span>
+            <input type="range" min="0" max="1" step="0.1" @bind="SessionSettings.SoundVolume" />
+        </label>
+
+        <label>
+            <span class="label">Music volume</span>
+            <input type="range" min="0" max="1" step="0.1" @bind="SessionSettings.MusicVolume" />
+        </label>
+    </div>
+</div>
